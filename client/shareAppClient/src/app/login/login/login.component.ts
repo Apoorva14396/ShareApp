@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { ThrowStmt } from "@angular/compiler";
 
 @Component({
   selector: "app-login",
@@ -35,6 +36,8 @@ export class LoginComponent implements OnInit {
         console.log(this.detailsobj.role);
         if (this.detailsobj.role === "admin") {
           this.router.navigate(["admin", "dashboard"]);
+        } else if (this.detailsobj.role === "user") {
+          this.router.navigate(["user", "dashboard"]);
         }
       },
       err => {
