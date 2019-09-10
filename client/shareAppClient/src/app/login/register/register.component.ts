@@ -43,7 +43,8 @@ export class RegisterComponent implements OnInit {
   }
   onSubmit() {
     if (this.registrationForm.invalid) {
-      return;
+      alert("invalid details");
+      return this.router.navigateByUrl("");
     }
     this.submitted = true;
     alert("added");

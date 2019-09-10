@@ -28,12 +28,12 @@ export class LoginComponent implements OnInit {
 
   myForm(data1) {
     this.formval = data1;
-    console.log(this.formval);
+    // console.log(this.formval);
     this.http.post("http://localhost:3000/login", this.formval).subscribe(
       data => {
         this.detailsobj = data;
-        console.log(data);
-        console.log(this.detailsobj.role);
+        // console.log(data);
+        // console.log(this.detailsobj.role);
         if (this.detailsobj.role === "admin") {
           this.router.navigate(["admin", "dashboard"]);
         } else if (this.detailsobj.role === "user") {

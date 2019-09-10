@@ -7,7 +7,8 @@ const routes: Routes = [
   {
     path: "dashboard",
     component: DashboardComponent
-  }
+  },
+  { path: "login", loadChildren: "../login/login.module#LoginModule" }
 ];
 
 @NgModule({
