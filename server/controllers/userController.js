@@ -1,6 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const nodeMailer = require("../utils/nodeMailer");
 const saltRounds = 10;
 
 var router = express.Router();
@@ -21,10 +22,29 @@ const handleRegister = async (req, res) => {
     } else {
       console.log("Error in saving :" + JSON.stringify(err, undefined, 2));
     }
+    let token = jwt.sign({ email: doc.email }, "secretkey", {
+      expiresIn: "12h"
+    });
+    doc.emailToken = token;
+    doc.save();
+    nodeMailer.createTemplate(doc, token);
+    nodeMailer.setReceivers(doc.email);
+    nodeMailer.sendMailer();
   });
 };
+const handleMail = async (req, res) => {
+  console.log(req.params.token);
+  res.send("Your email has been verified, proceed to login.");
+  let decodedToken = await jwt.verify(req.params.token, "secretkey");
+  console.log(decodedToken);
+  let updatedUser = await UserModel.findOneAndUpdate(
+    { email: decodedToken.email },
+    { $set: { emailVerified: true } },
+    { new: true }
+  );
+  console.log(updatedUser);
+};
 const handleLogin = (req, res) => {
-  // console.log("handleLogin", req.body);
   UserModel.findOne({ email: req.body.email }, (err, user) => {
     if (!user) {
       res.status(401).send({ message: "email doesn't exist" });
@@ -66,7 +86,9 @@ const handleCheck = (req, res) => {
   console.log("check successful");
   res.send({ message: "you can access the application" }).status(200);
 };
+
 router.post("/register", handleRegister);
 router.post("/login", handleLogin);
 router.post("/login/check", verifyToken, handleCheck);
+router.get("/register/verifyemail/:token", handleMail);
 module.exports = router;

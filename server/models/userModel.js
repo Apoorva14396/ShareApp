@@ -7,7 +7,9 @@ var UserModel = mongoose.model(
     dob: { type: String },
     email: { type: String },
     password: { type: String },
-    role: { type: String, default: "user" }
+    role: { type: String, default: "user" },
+    emailVerified: { type: String, default: false },
+    emailToken: { type: String, default: null }
   },
   "users"
 );

@@ -3,12 +3,13 @@ import { CommonModule } from "@angular/common";
 
 import { AdminRoutingModule } from "./admin-routing.module";
 import { DashboardComponent } from "./dashboard/dashboard.component";
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from "./footer/footer.component";
+import { AboutusComponent } from "./aboutus/aboutus.component";
 
 @NgModule({
-  declarations: [DashboardComponent, FooterComponent],
+  declarations: [DashboardComponent, FooterComponent, AboutusComponent],
   imports: [CommonModule, AdminRoutingModule],
-  exports: [DashboardComponent],
+  exports: [DashboardComponent, AboutusComponent],
   bootstrap: [DashboardComponent]
 })
 export class AdminModule {}

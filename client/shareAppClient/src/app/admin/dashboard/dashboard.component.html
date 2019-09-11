@@ -15,14 +15,17 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="#">About Us</a></li>
+        <li>
+          <a routerLink="/about">About Us</a>
+        </li>
         <li><a href="#">Terms & Conditions</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a routerlink="/login"
-            ><span class="glyphicon glyphicon-log-out"></span> Logout</a
-          >
+          <button class="btn btn-primary" (click)="logOut()">
+            <span class="glyphicon glyphicon-off"></span>Logout
+          </button>
+          ><span class="glyphicon glyphicon-off"></span>
         </li>
       </ul>
     </div>
