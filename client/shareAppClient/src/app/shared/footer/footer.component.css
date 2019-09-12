@@ -1,0 +1,9 @@
+/* css for footer.component.html file*/
+.fixed_footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: slategray;
+  margin-bottom: 0;
+}

@@ -8,6 +8,7 @@ import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./login/login.component";
 import { ErrorComponent } from "./error/error.component";
 import { AdminModule } from "../admin/admin.module";
+import { SharedModule } from "../shared/shared.module";
 @NgModule({
   declarations: [RegisterComponent, LoginComponent, ErrorComponent],
   imports: [
@@ -16,7 +17,8 @@ import { AdminModule } from "../admin/admin.module";
     ReactiveFormsModule,
     HttpClientModule,
     AdminModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   exports: [
     LoginRoutingModule,
@@ -24,7 +26,8 @@ import { AdminModule } from "../admin/admin.module";
     HttpClientModule,
     RegisterComponent,
     AdminModule,
-    LoginComponent
+    LoginComponent,
+    SharedModule
   ]
 })
 export class LoginModule {}

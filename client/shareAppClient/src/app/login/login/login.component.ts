@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { ThrowStmt } from "@angular/compiler";
+import { AuthService } from "../../auth.service";
 
 @Component({
   selector: "app-login",
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
   loginForm: FormGroup;
   detailsobj: any = [];
@@ -34,9 +36,9 @@ export class LoginComponent implements OnInit {
         this.detailsobj = data;
         console.log(data);
         console.log(this.detailsobj.role);
-        if (this.detailsobj.role === "admin") {
+        if (this.detailsobj.role === "admin" && this.loginForm.valid) {
           this.router.navigate(["admin", "dashboard"]);
-        } else if (this.detailsobj.role === "user") {
+        } else if (this.detailsobj.role === "user" && this.loginForm.valid) {
           this.router.navigate(["user", "dashboard"]);
         }
       },
@@ -48,6 +50,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.myForm(this.loginForm.value);
+    // console.log(this.loginForm.value);
+    this.authService.isAuthenticated();
     if (this.loginForm.invalid) {
       alert("invalid details ");
       this.router.navigate(["/error"]);

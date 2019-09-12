@@ -20,20 +20,25 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <button class="btn btn-primary" (click)="logOut()">
-            <span class="glyphicon glyphicon-off"></span>Logout
-          </button>
+          <button class="btn btn-primary" (click)="logOut()">Logout</button>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-
 <div class="container-fluid text-center">
   <div class="row content">
-    <div class="col-sm-8 text-left">
-      <h1>Welcome</h1>
+    <div class="col-sm-2 sidenav">
+      <p><a routerLink="/file-sharing">Share File</a></p>
+      <p><a href="#">Friends</a></p>
     </div>
+    <div class="container-fluid text-center">
+      <div class="row content">
+        <div class="col-sm-8 text-left">
+          <h1>Welcome</h1>
+        </div>
+      </div>
+    </div>
+    <app-footer></app-footer>
   </div>
 </div>
-<!-- <app-footer></app-footer> -->
