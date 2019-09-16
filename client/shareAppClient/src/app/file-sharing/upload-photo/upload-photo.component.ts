@@ -14,9 +14,11 @@ export class UploadPhotoComponent implements OnInit {
   constructor(private http: HttpClient, private route: Router) {}
 
   ngOnInit() {}
+
   details(data1) {
     this.picload = data1;
-    this.http.post("http://localhost:3000/uploads", this.picload).subscribe(
+    console.log(data1);
+    this.http.post("http://localhost:3000/upload", this.picload).subscribe(
       data => {},
       err => {
         console.log(err);

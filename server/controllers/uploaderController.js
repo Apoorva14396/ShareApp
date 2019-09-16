@@ -23,6 +23,7 @@ const conn = mongoose.createConnection(mongoURI);
 let gfs;
 conn.once("open", () => {
   // init stream
+  console.log("Hiiii");
   gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection("uploads");
 });
@@ -74,10 +75,11 @@ const searchHandler = (req, res) => {
 // @route POST /upload
 // @desc  Uploads file to DB
 const uploadHandler =
-  (upload.single("file"),
+  // ,
   (req, res) => {
-    res.redirect("/");
-  });
+    console.log(req.body);
+    console.log(uploadHandler);
+  };
 
 // @route GET /image/:filename
 // @desc Display Image
@@ -117,6 +119,7 @@ const deleteHandler = (req, res) => {
 };
 
 router.get("/uploads", searchHandler);
-router.post("/upload", uploadHandler);
+router.post("/upload", upload.single("file"), uploadHandler);
 router.get("/image/:filename", displayHandler);
 router.delete("/files/:id", deleteHandler);
+module.exports = router;

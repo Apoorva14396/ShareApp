@@ -8,6 +8,8 @@ import { AdminModule } from "./admin/admin.module";
 import { UserModule } from "./user/user.module";
 import { SharedModule } from "./shared/shared.module";
 import { FileSharingModule } from "./file-sharing/file-sharing.module";
+import { FriendModule } from "./friend/friend.module";
+import { AngularFontAwesomeModule } from "angular-font-awesome";
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +20,9 @@ import { FileSharingModule } from "./file-sharing/file-sharing.module";
     AdminModule,
     UserModule,
     SharedModule,
-    FileSharingModule
+    FileSharingModule,
+    FriendModule,
+    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

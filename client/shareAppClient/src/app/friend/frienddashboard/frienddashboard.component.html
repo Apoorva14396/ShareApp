@@ -1,0 +1,77 @@
+<router-outlet></router-outlet>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button
+        type="button"
+        class="navbar-toggle"
+        data-toggle="collapse"
+        data-target="#myNavbar"
+      >
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Dashboard</a>
+      <a class="navbar-brand" href="#"> Friend list</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <button class="btn btn-primary" (click)="logout()">Logout</button>
+          <button class="btn btn-success" disabled>
+            <span class="glyphicon glyphicon-user"></span>{{ username }}
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="main">
+  <section class="searchForm">
+    <div class="container">
+      <div class="searchForm-content">
+        <div class="searchForm">
+          <h3><label>Search User by email id</label></h3>
+          <br />
+          <form method="POST" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="email"></label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                formControlName="email"
+                placeholder="Enter email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="sendername"></label>
+              <input
+                type="hidden"
+                name="sendername"
+                id="sendername"
+                formControlName="sendername"
+                placeholder="Enter sender's name"
+              />
+            </div>
+            <div>
+              <button class="btn btn-primary" type="submit">search</button>
+            </div>
+            <br />
+            <div class="form-group">
+              <span *ngIf="isPresent">
+                <h3><p>User has been searched</p></h3>
+                <h3>Want to send Friend Request?</h3>
+                <br />
+                <button type="submit" (click)="onClick()">
+                  Add Friend
+                </button></span
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

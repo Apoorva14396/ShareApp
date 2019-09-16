@@ -13,10 +13,6 @@ const routes: Routes = [
     path: "file-sharing",
     loadChildren: "./file-sharing/file-sharing.module#FileSharingModule"
   }
-  // {
-  //   path: "shared",
-  //   loadChildren: "./shared-file/shared-file.module#SharedFileModule"
-  // }
 ];
 
 @NgModule({

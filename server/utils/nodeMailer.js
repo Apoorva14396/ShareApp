@@ -26,7 +26,7 @@ class Mailer {
   }
   createTemplate(user, token) {
     let url = `https://localhost:3000/register/verifyemail/${token}`;
-    this.mailOptions.html = `<p> Follow link below to verify your email :${user.email} 
+    this.mailOptions.html = `<p> Follow link below to verify your email token is valid for 1 hour:${user.email} 
     <a href= ${url}>Verify</a></p>`;
     this.mailOptions.text = `Follow link below to verify your email :${user.email} , 
     for slow browser connection ${url}`;
@@ -41,7 +41,6 @@ class Mailer {
       }
       console.log("Message sent: %s", info.messageId);
       console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-      // res.render("contact", { msg: "Email has been sent" });
     });
   }
 }
@@ -49,5 +48,3 @@ class Mailer {
 const MailerObj = new Mailer();
 
 module.exports = MailerObj;
-
-// app.listen(3000, () => console.log("Server started..."));

@@ -21,6 +21,9 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           <button class="btn btn-primary" (click)="logOut()">Logout</button>
+          <button class="btn btn-success" disabled>
+            <span class="glyphicon glyphicon-user"></span>{{ username }}
+          </button>
         </li>
       </ul>
     </div>
@@ -30,7 +33,7 @@
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <p><a routerLink="/file-sharing">Share File</a></p>
-      <p><a href="#">Friends</a></p>
+      <p><a routerLink="/friend">Friends</a></p>
     </div>
     <div class="container-fluid text-center">
       <div class="row content">

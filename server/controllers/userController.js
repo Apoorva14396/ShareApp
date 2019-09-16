@@ -16,6 +16,7 @@ const handleRegister = async (req, res) => {
     email: req.body.email,
     password: hash
   });
+
   user.save((err, doc) => {
     if (!err) {
       res.send(doc);
@@ -23,7 +24,7 @@ const handleRegister = async (req, res) => {
       console.log("Error in saving :" + JSON.stringify(err, undefined, 2));
     }
     let token = jwt.sign({ email: doc.email }, "secretkey", {
-      expiresIn: "12h"
+      expiresIn: "1h"
     });
     doc.emailToken = token;
     doc.save();
@@ -33,31 +34,37 @@ const handleRegister = async (req, res) => {
   });
 };
 const handleMail = async (req, res) => {
-  console.log(req.params.token);
-  res.send("Your email has been verified, proceed to login.");
+  console.log("token", req.params.token);
   let decodedToken = await jwt.verify(req.params.token, "secretkey");
-  console.log(decodedToken);
+  console.log("decoded token", decodedToken);
   let updatedUser = await UserModel.findOneAndUpdate(
     { email: decodedToken.email },
     { $set: { emailVerified: true } },
     { new: true }
   );
-  console.log(updatedUser);
+  console.log(updatedUser.emailVerified);
+  res.send("your email has been verified proceed to login");
 };
 const handleLogin = (req, res) => {
+  console.log(req.body);
   UserModel.findOne({ email: req.body.email }, (err, user) => {
-    if (!user) {
+    console.log(user.emailVerified);
+    if (user.emailVerified == true) {
+      let token = jwt.sign({ user: user }, "secretkey", { expiresIn: "1h" });
+      res.send({
+        id: user._id,
+        role: user.role,
+        token: token,
+        name: user.name
+      });
+    } else if (!user) {
       res.status(401).send({ message: "email doesn't exist" });
     } else if (!bcrypt.compare(req.body.password, user.password)) {
       res.status(400).send({ message: "Password doesn't match" });
-    } else {
-      let token = jwt.sign({ user: user }, "secretkey", { expiresIn: "30s" });
-      res.send({ id: user._id, role: user.role, token: token });
     }
   });
 };
 const verifyToken = (req, res, next) => {
-  // console.log(req);
   //Get auth header value
   const bearerHeader = req.headers["authorization"];
   //Check if bearer is undefined
@@ -87,8 +94,58 @@ const handleCheck = (req, res) => {
   res.send({ message: "you can access the application" }).status(200);
 };
 
+const handleSearch = (req, res) => {
+  // console.log(req.body);
+  UserModel.findOne({ email: req.body.email }, (err, user) => {
+    if (!user) {
+      res.status(400).send({ message: "cannot send" });
+    } else {
+      res
+        .status(200)
+        .send({ id: user._id, email: user.email, name: user.name });
+    }
+  });
+};
+
+const sendRequest = (req, res) => {
+  // console.log("hiiii");
+  // console.log(req.body["sendername"]);
+  // console.log(typeof req.body.sendername);
+  UserModel.findOne({ email: req.body.email }, (err, user) => {
+    if (!user) {
+      res.status(400).send({ message: "cannot send" });
+    } else {
+      console.log(req.body.sendername);
+      console.log(req.body.email);
+      res.status(200).send({ message: "ok" });
+      const result = UserModel.updateOne(
+        { email: req.body.email },
+        { $set: { request: { name: req.body.sendername } } },
+        { $inc: { totalRequest: 1 } }
+      );
+      console.log(result);
+    }
+  });
+
+  // console.log(typeof name.name === typeof req.body.sendername);
+
+  // UserModel.update(
+  //   { email: req.body.email },
+  //   {
+  //     $push: {
+  //       request: {
+  //         name: req.body.sendername
+  //       }
+  //     },
+  //     $inc: { totalRequest: 1 }
+  //   }
+  // );
+};
+
 router.post("/register", handleRegister);
 router.post("/login", handleLogin);
 router.post("/login/check", verifyToken, handleCheck);
 router.get("/register/verifyemail/:token", handleMail);
+router.post("/searchUser", handleSearch);
+router.post("/sendRequest", sendRequest);
 module.exports = router;
