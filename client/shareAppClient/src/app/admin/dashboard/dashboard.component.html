@@ -16,17 +16,22 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li>
-          <a routerLink="/about">About Us</a>
+          <a class="navbar-brand" routerLink="/about">About Us</a>
         </li>
-        <li><a routerLink="/terms">Terms & Conditions</a></li>
+        <li>
+          <a class="navbar-brand" routerLink="/terms">Terms & Conditions</a>
+        </li>
+        <li>
+          <a class="navbar-brand" routerLink="/management">User's Management</a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <button class="btn btn-primary" (click)="logOut()">
-            <span class="glyphicon glyphicon-off"></span>Logout
-          </button>
           <button class="btn btn-success" disabled>
             <span class="glyphicon glyphicon-user"></span>{{ username }}
+          </button>
+          <button class="btn btn-primary" (click)="logOut()">
+            <span class="glyphicon glyphicon-off"></span>Logout
           </button>
         </li>
       </ul>

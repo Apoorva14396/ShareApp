@@ -4,6 +4,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AboutusComponent } from "./aboutus/aboutus.component";
 import { TermsComponent } from "./terms/terms.component";
+import { UsermanagementComponent } from "./usermanagement/usermanagement.component";
 import { AuthGuard } from "../auth.guard";
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: "terms",
     component: TermsComponent
+  },
+  {
+    path: "management",
+    component: UsermanagementComponent
   },
   {
     path: "login",

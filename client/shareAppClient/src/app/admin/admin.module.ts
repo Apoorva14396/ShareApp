@@ -6,16 +6,23 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { FooterComponent } from "./footer/footer.component";
 import { AboutusComponent } from "./aboutus/aboutus.component";
 import { TermsComponent } from "./terms/terms.component";
+import { UsermanagementComponent } from "./usermanagement/usermanagement.component";
 
 @NgModule({
   declarations: [
     DashboardComponent,
     FooterComponent,
     AboutusComponent,
-    TermsComponent
+    TermsComponent,
+    UsermanagementComponent
   ],
   imports: [CommonModule, AdminRoutingModule],
-  exports: [DashboardComponent, AboutusComponent, TermsComponent],
+  exports: [
+    DashboardComponent,
+    AboutusComponent,
+    TermsComponent,
+    UsermanagementComponent
+  ],
   bootstrap: [DashboardComponent]
 })
 export class AdminModule {}

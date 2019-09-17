@@ -13,9 +13,9 @@ const routes: Routes = [
   {
     path: "register",
     component: RegisterComponent
-  },
-  { path: "error", component: ErrorComponent },
-  { path: "**", redirectTo: "error" }
+  }
+  // { path: "error", component: ErrorComponent },
+  // { path: "**", redirectTo: "error" }
 ];
 
 @NgModule({

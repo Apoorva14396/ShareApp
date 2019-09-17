@@ -6,11 +6,11 @@ import { AuthService } from "../../auth.service";
 import { NameService } from "../../name.service";
 
 @Component({
-  selector: "app-frienddashboard",
-  templateUrl: "./frienddashboard.component.html",
-  styleUrls: ["./frienddashboard.component.css"]
+  selector: "app-friendsearch",
+  templateUrl: "./friendsearch.component.html",
+  styleUrls: ["./friendsearch.component.css"]
 })
-export class FrienddashboardComponent implements OnInit {
+export class FriendsearchComponent implements OnInit {
   formvalue: any;
   obj: any;
   searchForm: FormGroup;
@@ -70,7 +70,7 @@ export class FrienddashboardComponent implements OnInit {
         }
       );
     this.http
-      .post("http://localhost:3000/receiveRequest", this.formvalue)
+      .post("http://localhost:3000/sendRequest", this.formvalue)
       .subscribe(
         data => {
           console.log("Hii there from Form");
@@ -81,7 +81,7 @@ export class FrienddashboardComponent implements OnInit {
         }
       );
     this.http
-      .post("http://localhost:3000/sendRequest", this.formvalue)
+      .post("http://localhost:3000/receiveRequest", this.formvalue)
       .subscribe(
         data => {
           console.log("Hii there from Form");

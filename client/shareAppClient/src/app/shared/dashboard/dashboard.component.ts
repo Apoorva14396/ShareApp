@@ -11,6 +11,7 @@ import { NameService } from "../../name.service";
 })
 export class DashboardComponent implements OnInit {
   username: string;
+  useremail: string;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit {
   }
   newfunc() {
     this.username = JSON.stringify(localStorage.getItem("key"));
+    this.useremail = JSON.stringify(localStorage.getItem("key1"));
   }
   ngOnInit() {
     this.newfunc();

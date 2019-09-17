@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   userName: any;
   username: any;
+  emailName: any;
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: ["", [Validators.required, Validators.email]],
@@ -40,10 +41,14 @@ export class LoginComponent implements OnInit {
         this.detailsobj = data;
         console.log(data);
         console.log(this.detailsobj.role);
+        console.log(this.detailsobj.email);
+        this.emailName = this.detailsobj.email;
         this.userName = this.detailsobj.name;
         this.nameService.fetchName(this.userName);
+        this.nameService.fetchEmail(this.emailName);
         this.authService.isAuthenticated();
         localStorage.setItem("key", this.userName);
+        localStorage.setItem("key1", this.emailName);
         if (this.detailsobj.role === "admin" && this.loginForm.valid) {
           this.router.navigate(["admin", "dashboard"]);
         } else if (this.detailsobj.role === "user" && this.loginForm.valid) {

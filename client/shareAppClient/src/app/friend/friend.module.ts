@@ -7,9 +7,11 @@ import { AdminModule } from "../admin/admin.module";
 import { SharedModule } from "../shared/shared.module";
 import { FrienddashboardComponent } from "./frienddashboard/frienddashboard.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { FriendrequestComponent } from "./friendrequest/friendrequest.component";
+import { FriendsearchComponent } from './friendsearch/friendsearch.component';
 
 @NgModule({
-  declarations: [FrienddashboardComponent],
+  declarations: [FrienddashboardComponent, FriendrequestComponent, FriendsearchComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -18,7 +20,7 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
     ReactiveFormsModule,
     FormsModule
   ],
-  exports: [],
+  exports: [FriendrequestComponent],
   bootstrap: [FrienddashboardComponent]
 })
 export class FriendModule {}
