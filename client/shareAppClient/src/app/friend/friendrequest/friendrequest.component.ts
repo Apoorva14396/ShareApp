@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-friendrequest',
-  templateUrl: './friendrequest.component.html',
-  styleUrls: ['./friendrequest.component.css']
+  selector: "app-friendrequest",
+  templateUrl: "./friendrequest.component.html",
+  styleUrls: ["./friendrequest.component.css"]
 })
 export class FriendrequestComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

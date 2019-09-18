@@ -11,6 +11,7 @@ import { NameService } from "../../name.service";
   styleUrls: ["./friendsearch.component.css"]
 })
 export class FriendsearchComponent implements OnInit {
+  reqAlready = null;
   formvalue: any;
   obj: any;
   searchForm: FormGroup;
@@ -45,6 +46,7 @@ export class FriendsearchComponent implements OnInit {
   }
   details(obj) {
     this.formvalue = obj;
+    console.log(this.formvalue);
     this.http
       .post("http://localhost:3000/searchUser", this.formvalue)
       .subscribe(
@@ -58,37 +60,28 @@ export class FriendsearchComponent implements OnInit {
   }
   sendReq(obj) {
     this.formvalue = obj;
+    console.log(this.formvalue);
+    const id = localStorage.getItem("id");
     this.http
-      .post("http://localhost:3000/requestAlready", this.formvalue)
+      .post("http://localhost:3000/requestAlready", {
+        formvalue: this.formvalue,
+        id: id
+      })
       .subscribe(
         data => {
-          console.log("Hii there from Form");
-          console.log(data);
+          console.log("data", data["message"]);
+          // todo
+          this.reqAlready = data["message"];
+          setTimeout(() => {
+            this.reqAlready = null;
+          }, 3000);
         },
         err => {
-          console.log(err);
-        }
-      );
-    this.http
-      .post("http://localhost:3000/sendRequest", this.formvalue)
-      .subscribe(
-        data => {
-          console.log("Hii there from Form");
-          console.log(data);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-    this.http
-      .post("http://localhost:3000/receiveRequest", this.formvalue)
-      .subscribe(
-        data => {
-          console.log("Hii there from Form");
-          console.log(data);
-        },
-        err => {
-          console.log(err);
+          console.log("err", err);
+          this.reqAlready = err.error;
+          setTimeout(() => {
+            this.reqAlready = null;
+          }, 3000);
         }
       );
   }

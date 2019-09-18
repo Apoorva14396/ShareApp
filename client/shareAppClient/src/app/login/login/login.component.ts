@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
         this.authService.isAuthenticated();
         localStorage.setItem("key", this.userName);
         localStorage.setItem("key1", this.emailName);
+        localStorage.setItem("id", this.detailsobj.id);
         if (this.detailsobj.role === "admin" && this.loginForm.valid) {
           this.router.navigate(["admin", "dashboard"]);
         } else if (this.detailsobj.role === "user" && this.loginForm.valid) {

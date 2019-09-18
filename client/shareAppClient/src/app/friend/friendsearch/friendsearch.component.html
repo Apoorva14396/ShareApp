@@ -3,6 +3,9 @@
 <div class="main">
   <section class="searchForm">
     <div class="container">
+      <div class="alert alert-danger" *ngIf="reqAlready">
+        <p>{{ reqAlready }}</p>
+      </div>
       <div class="searchForm-content">
         <div class="searchForm">
           <h3><label>Search User by email id</label></h3>
@@ -18,7 +21,7 @@
                 placeholder="Enter email"
               />
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="sendername"></label>
               <input
                 type="hidden"
@@ -27,7 +30,7 @@
                 formControlName="senderemail"
                 placeholder="Enter sender's name"
               />
-            </div>
+            </div> -->
             <div>
               <button class="btn btn-primary" type="submit">search</button>
             </div>
@@ -37,7 +40,7 @@
                 <h3><p>User has been searched</p></h3>
                 <h3>Want to send Friend Request?</h3>
                 <br />
-                <button type="submit" (onclick)="onClick()">
+                <button type="submit" (click)="onClick()">
                   Add Friend
                 </button>
               </span>
