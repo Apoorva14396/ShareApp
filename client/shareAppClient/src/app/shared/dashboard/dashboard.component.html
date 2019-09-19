@@ -1,47 +1,25 @@
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button
-        type="button"
-        class="navbar-toggle"
-        data-toggle="collapse"
-        data-target="#myNavbar"
-      >
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">User's Dashboard</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Terms & Conditions</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <button class="btn btn-success" disabled>
-            <span class="glyphicon glyphicon-user"></span>{{ username }}
-          </button>
-          <button class="btn btn-primary" (click)="logOut()">Logout</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="container-fluid text-center">
+<app-header></app-header>
+<div class="container-fluid ">
   <div class="row content">
-    <div class="col-sm-2 sidenav">
-      <p><a routerLink="/file-sharing">Share File</a></p>
-      <p><a routerLink="/friend">Friends</a></p>
+    <h1>Welcome {{ username }}</h1>
+    <div class="col-sm-6">
+      <h2>
+        Want to Share file?
+        <br />
+        Share file<br />
+        <a routerLink="/file-sharing">Share File </a>
+      </h2>
     </div>
-    <div class="container-fluid text-center">
-      <div class="row content">
-        <div class="col-sm-8 text-left">
-          <h1>Welcome</h1>
-        </div>
-      </div>
+    <div class="col-sm-6">
+      <h2>
+        Want to Send Friend Request?
+        <br />
+        Friend Request
+        <br />
+        <a routerLink="/friend">Friends</a>
+      </h2>
     </div>
-    <app-footer></app-footer>
   </div>
 </div>
+
+<app-footer></app-footer>

@@ -3,20 +3,22 @@ import { Routes, RouterModule } from "@angular/router";
 
 // import { FriendModule } from "./friend.module";
 import { FrienddashboardComponent } from "./frienddashboard/frienddashboard.component";
-import { FriendrequestComponent } from "./friendrequest/friendrequest.component";
 import { FriendsearchComponent } from "./friendsearch/friendsearch.component";
+
+import { NotificationComponent } from "./notification/notification.component";
 const routes: Routes = [
   {
     path: "",
     component: FrienddashboardComponent
   },
-  {
-    path: "request",
-    component: FriendrequestComponent
-  },
+
   {
     path: "search",
     component: FriendsearchComponent
+  },
+  {
+    path: "notification",
+    component: NotificationComponent
   }
 ];
 

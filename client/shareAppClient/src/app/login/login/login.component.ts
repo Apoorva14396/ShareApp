@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
     // console.log(this.formval);
     this.http.post("http://localhost:3000/login", this.formval).subscribe(
       data => {
+        localStorage.setItem("token", data["token"]);
         this.detailsobj = data;
         console.log(data);
         console.log(this.detailsobj.role);
@@ -45,10 +46,8 @@ export class LoginComponent implements OnInit {
         this.emailName = this.detailsobj.email;
         this.userName = this.detailsobj.name;
         this.nameService.fetchName(this.userName);
-        this.nameService.fetchEmail(this.emailName);
         this.authService.isAuthenticated();
         localStorage.setItem("key", this.userName);
-        localStorage.setItem("key1", this.emailName);
         localStorage.setItem("id", this.detailsobj.id);
         if (this.detailsobj.role === "admin" && this.loginForm.valid) {
           this.router.navigate(["admin", "dashboard"]);

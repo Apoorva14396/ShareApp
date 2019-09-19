@@ -1,45 +1,56 @@
-<app-dashboard></app-dashboard>
+<app-header></app-header>
+<div class="table-responsive">
+  <button class="btn btn-primary btn-block" routerLink="../">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    Back to dashboard
+  </button>
+  <table class="table">
+    <ul class="list">
+      <li>
+        <span style="text-align: center">Email</span>
+        <span style="text-align: center">Active</span>
+        <span style="text-align: center">AccessGranted</span>
+        <span style="text-align: center">Actions</span>
+      </li>
+      <li *ngFor="let item of users">
+        <span style="text-align: center">{{ item._id }}</span>
+        <span style="text-align: center">{{ item.email }}</span>
+        <span style="text-align: center">4341</span>
+        <!-- <span > -->
+        <span
+          *ngIf="item.isVerified"
+          style="text-align: center"
+          class="label label-success"
+          >{{ item.isVerified }}</span
+        >
 
-<div class="row">
-  <div class="col-sm-10">
-    <div class="container">
-      <h2>
-        List of registered users
-      </h2>
-      <table>
-        <th>
-          Registered At
-        </th>
-        <th>
-          Name
-        </th>
-        <th>
-          Status
-        </th>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </table>
-
-      <br />
-      <br />
-    </div>
-  </div>
-</div>
-
-<!-- <pagination-controls
+        <span
+          *ngIf="!item.isVerified"
+          style="text-align: center"
+          class="label label-danger"
+          >{{ item.isVerified }}</span
+        >
+        <!-- </span> -->
+        <span style="text-align: center">
+          <div class="btn-group btn-group-xs" role="group" aria-label="...">
+            <!-- <button type="button" class="btn btn-default">Edit</button>
+            <button type="button" class="btn btn-default" disabled>
+              Delete
+            </button> -->
+            <button class="btn btn-danger" (click)="blockUser(item.email)">
+              Block
+            </button>
+            <button class="btn btn-success" (click)="unblockUser(item.email)">
+              Unblock
+            </button>
+          </div>
+        </span>
+        <span></span>
+      </li>
+      <!-- <pagination-controls
   class="pagination-class"
   (pageChange)="p = $event"
 ></pagination-controls> -->
+    </ul>
+  </table>
+</div>

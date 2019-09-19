@@ -7,6 +7,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { AboutusComponent } from "./aboutus/aboutus.component";
 import { TermsComponent } from "./terms/terms.component";
 import { UsermanagementComponent } from "./usermanagement/usermanagement.component";
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { UsermanagementComponent } from "./usermanagement/usermanagement.compone
     FooterComponent,
     AboutusComponent,
     TermsComponent,
-    UsermanagementComponent
+    UsermanagementComponent,
+    HeaderComponent
   ],
   imports: [CommonModule, AdminRoutingModule],
   exports: [

@@ -32,3 +32,9 @@ footer {
     height: auto;
   }
 }
+h1 {
+  text-align: center;
+}
+.col-sm-6 {
+  text-align: center;
+}

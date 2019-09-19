@@ -1,11 +1,12 @@
 <router-outlet></router-outlet>
-<app-frienddashboard></app-frienddashboard>
+<app-header></app-header>
 <div class="main">
   <section class="searchForm">
     <div class="container">
       <div class="alert alert-danger" *ngIf="reqAlready">
         <p>{{ reqAlready }}</p>
       </div>
+
       <div class="searchForm-content">
         <div class="searchForm">
           <h3><label>Search User by email id</label></h3>
@@ -18,21 +19,11 @@
                 name="email"
                 id="email"
                 formControlName="email"
-                placeholder="Enter email"
+                placeholder="abc@mail.com"
               />
             </div>
-            <!-- <div class="form-group">
-              <label for="sendername"></label>
-              <input
-                type="hidden"
-                name="senderemail"
-                id="senderemail"
-                formControlName="senderemail"
-                placeholder="Enter sender's name"
-              />
-            </div> -->
             <div>
-              <button class="btn btn-primary" type="submit">search</button>
+              <button class="btn btn-primary" type="submit">Find User</button>
             </div>
             <br />
             <div class="form-group">

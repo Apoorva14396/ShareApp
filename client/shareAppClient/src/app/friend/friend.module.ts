@@ -7,11 +7,17 @@ import { AdminModule } from "../admin/admin.module";
 import { SharedModule } from "../shared/shared.module";
 import { FrienddashboardComponent } from "./frienddashboard/frienddashboard.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { FriendrequestComponent } from "./friendrequest/friendrequest.component";
-import { FriendsearchComponent } from './friendsearch/friendsearch.component';
+import { FriendsearchComponent } from "./friendsearch/friendsearch.component";
+import { HeaderComponent } from "./header/header.component";
+import { NotificationComponent } from "./notification/notification.component";
 
 @NgModule({
-  declarations: [FrienddashboardComponent, FriendrequestComponent, FriendsearchComponent],
+  declarations: [
+    FrienddashboardComponent,
+    FriendsearchComponent,
+    HeaderComponent,
+    NotificationComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -20,7 +26,7 @@ import { FriendsearchComponent } from './friendsearch/friendsearch.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  exports: [FriendrequestComponent],
+  exports: [],
   bootstrap: [FrienddashboardComponent]
 })
 export class FriendModule {}
