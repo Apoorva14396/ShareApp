@@ -1,8 +1,5 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const nodeMailer = require("../utils/nodeMailer");
-const saltRounds = 10;
 
 var router = express.Router();
 
@@ -25,22 +22,8 @@ const verifyToken = (req, res, next) => {
     next();
   });
 };
-// const sendRequest = (req, res) => {
-//   console.log("Hi");
-//   UserModel.updateOne(
-//     { _id: req.body.id },
-//     { $push: { sentRequest: { email: req.body.email } } },
-//     (err, user) => {
-//       if (!user) {
-//         res.status(400).send({ message: "Nooo" });
-//       } else {
-//         console.log(req.body.email);
-//         console.log(req.body.id);
-//         res.status(200).send({ message: "ok" });
-//       }
-//     }
-//   );
-// };
+
+/* Search User */
 const handleSearch = (req, res) => {
   console.log(req.body);
   console.log("Sender's email", req.email);
@@ -61,6 +44,7 @@ const handleSearch = (req, res) => {
   }
 };
 
+/* Send Request */
 const requestAlready = (req, res) => {
   UserModel.findOne({ email: req.email }, (err, sender) => {
     if (err) {
@@ -68,17 +52,18 @@ const requestAlready = (req, res) => {
         .status(404)
         .send({ message: "Your are not a registered user" });
     }
-    UserModel.findOne({ email: req.body.email }, (err, user) => {
-      if (!user) {
+    UserModel.findOne({ email: req.body.email }, (err, friend) => {
+      if (!friend) {
         res.status(400).send({ message: "Not a Registered user" });
       } else {
         receiveremail = req.body.email;
         console.log(receiveremail);
         console.log("sender's email:", req.email);
         console.log("receiver's email:", req.body.email);
-        console.log(user.pendingrequest);
+        console.log(friend.pendingrequest);
+
         const reqArray = [];
-        for (let request of user.pendingrequest) {
+        for (let request of friend.pendingrequest) {
           reqArray.push(request.email[0]);
         }
         console.log(reqArray);
@@ -99,23 +84,34 @@ const requestAlready = (req, res) => {
         if (found == false && receiveremail !== req.email) {
           UserModel.updateOne(
             { email: req.email },
-            { $push: { sentRequest: { email: req.body.email } } },
-            (err, user) => {
-              if (!user) {
+            {
+              $push: {
+                sentRequest: { email: req.body.email, name: friend.name }
+              }
+            },
+            (err, Updateduser) => {
+              if (!Updateduser) {
                 res.status(400).send({ message: "Nooo" });
               } else {
                 console.log(req.body.email);
+                console.log(sender);
               }
             }
           );
           UserModel.updateOne(
             { email: req.body.email },
-            { $push: { pendingrequest: { email: req.email } } },
-            (err, user) => {
-              if (!user) {
+            {
+              $push: {
+                pendingrequest: { email: req.email, name: sender.name }
+              }
+            },
+            (err, UpdatedFriend) => {
+              if (!UpdatedFriend) {
                 res.status(400).send({ message: "cannot send" });
               } else {
                 console.log(req.body.email);
+                console.log(friend);
+                res.status(200).json(friend.name);
               }
             }
           );
@@ -125,47 +121,113 @@ const requestAlready = (req, res) => {
   });
 };
 
+/* Receive Notification */
 const notification = (req, res) => {
-  UserModel.findOne({ email: req.email }, (err, user) => {
-    if (!user) {
+  UserModel.findOne({ email: req.email }, (err, friend) => {
+    if (!friend) {
       res.status(400).send({ message: "noo" });
     } else {
-      console.log(user.pendingrequest);
-      console.log(typeof user.pendingrequest);
-      res.status(200).send({ pendingrequest: user.pendingrequest });
+      console.log(friend.pendingrequest);
+      console.log(typeof friend.pendingrequest);
+      res.status(200).send({ pendingrequest: friend.pendingrequest });
     }
   });
 };
 
-const accept = (req, res) => {
-  UserModel.findOne({ email: req.email }, (err, user) => {
-    if (!user) {
+/* Accept Request */
+const acceptRequest = (req, res) => {
+  console.log("body", req.body);
+  UserModel.updateOne(
+    { email: req.email },
+    {
+      $push: { friendList: { email: req.body } },
+      $inc: { totalRequest: 1 },
+      $pull: { pendingrequest: { email: req.body } }
+    },
+
+    (err, user) => {
+      if (!user) {
+        res.status(400).send({ message: "cannot accept" });
+      } else {
+        console.log(req.email);
+      }
+    }
+  );
+  UserModel.updateOne(
+    { email: req.body },
+    {
+      $push: { friendList: { email: req.email } },
+      $inc: { totalRequest: 1 }
+    },
+    (err, user) => {
+      if (!user) {
+        res.status(400).send({ message: "cannot accept" });
+      } else {
+        console.log(req.body.email);
+        console.log(req.email);
+      }
+    }
+  );
+};
+
+/* Reject Request */
+const rejectRequest = (req, res) => {
+  UserModel.updateOne(
+    { email: req.email },
+    { $pull: { pendingrequest: { email: req.body } } },
+    (err, user) => {
+      if (!user) {
+        res.status(400).send({ message: "cannot accept" });
+      } else {
+        console.log(req.body);
+        console.log(req.email);
+      }
+    }
+  );
+};
+
+/* Display Friend List */
+const getFriends = (req, res) => {
+  console.log(req.email);
+  UserModel.findOne({ email: req.email }, (err, friend) => {
+    if (!friend) {
       res.status(400).send({ message: "noo" });
     } else {
+      console.log(friend.friendList);
+      console.log(typeof friend.friendList);
+      res.status(200).send({ friendList: friend.friendList });
     }
   });
 };
-// const receiveRequest = (req, res) => {
-//   UserModel.updateOne(
-//     { email: req.body.email },
-//     {
-//       $push: { request: { email: req.body.senderemail } },
-//       $inc: { totalRequest: 1 }
-//     },
-//     (err, user) => {
-//       if (!user) {
-//         res.status(400).send({ message: "cannot send" });
-//       } else {
-//         console.log(req.body.email);
-//         console.log(req.body.senderemail);
-//         res.status(200).send({ message: "ok" });
-//       }
-//     }
-//   );
-// };
 
+/*Display Users*/
+const getUsers = (req, res) => {
+  console.log("email", req.email);
+  UserModel.find(
+    {},
+    { email: 1, role: 1, emailVerified: 1, _id: 0 },
+    (err, user) => {
+      if (!user) {
+        //res.status(400).send({ message: "noo" });
+      } else {
+        console.log(user);
+        const onlyUsers = [];
+        for (let u of user) {
+          if (u.role == "user") {
+            onlyUsers.push(u);
+          }
+        }
+        res.send(onlyUsers);
+      }
+    }
+  );
+};
+/* Routes */
 router.post("/searchUser", verifyToken, handleSearch);
 router.post("/requestAlready", verifyToken, requestAlready);
 router.get("/notification", verifyToken, notification);
-
+router.post("/accept", verifyToken, acceptRequest);
+router.post("/reject", verifyToken, rejectRequest);
+router.get("/friends", verifyToken, getFriends);
+router.get("/users", verifyToken, getUsers);
 module.exports = router;

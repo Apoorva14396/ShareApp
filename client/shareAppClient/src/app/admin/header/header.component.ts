@@ -22,8 +22,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
   }
   newfunc() {
-    this.username = JSON.stringify(localStorage.getItem("key"));
-    this.useremail = JSON.stringify(localStorage.getItem("key1"));
+    this.username = localStorage.getItem("key");
   }
   ngOnInit() {
     this.newfunc();

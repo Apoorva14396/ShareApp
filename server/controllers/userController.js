@@ -98,5 +98,4 @@ router.post("/register", handleRegister);
 router.post("/login", handleLogin);
 router.get("/user/dashboard", verifyToken, handleCheck);
 router.get("/register/verifyemail/:token", handleMail);
-
 module.exports = router;

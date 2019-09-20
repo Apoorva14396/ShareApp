@@ -11,13 +11,18 @@ var UserModel = mongoose.model(
     role: { type: String, default: "user" },
     emailVerified: { type: Boolean, default: false },
     emailToken: { type: String, default: null },
-    sentRequest: [{ email: { type: String, default: "" } }],
-    acceptedRequest: [{ email: { type: String, default: "" } }],
+    sentRequest: [
+      { name: { type: String }, email: { type: String, default: "" } }
+    ],
     pendingrequest: [
       {
         // userId: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
+        name: { type: String },
         email: { type: Array, default: "" }
       }
+    ],
+    friendList: [
+      { name: { type: String }, email: { type: Array, default: "" } }
     ],
     totalRequest: { type: Number, default: 0 },
     notification: [{ type: { type: String }, body: { type: String } }]

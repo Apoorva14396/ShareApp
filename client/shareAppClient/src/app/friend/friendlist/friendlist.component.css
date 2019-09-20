@@ -1,71 +1,3 @@
-h2 {
-  text-align: center;
-}
-/* css for employee-list.component.html file*/
-.container {
-  margin: auto;
-  align-self: auto;
-}
-table,
-th,
-td {
-  border: 5px solid black;
-  font-size: 30px;
-  padding: 15px;
-  align-self: center;
-}
-th {
-  /* background-color: goldenrod; */
-}
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #111;
-}
-label {
-  text-align: center;
-}
-p {
-  text-align: center;
-  font-size: 30px;
-}
-.pagination-class {
-  text-align: center;
-  font-size: 30px;
-}
-h1 {
-  text-align: center;
-}
-h2 {
-  text-align: center;
-}
-.links {
-  color: rgb(14, 40, 126);
-}
-.style {
-  color: green;
-}
-.style1 {
-  color: blueviolet;
-}
 .row.heading h2 {
   color: #fff;
   font-size: 52.52px;
@@ -176,7 +108,7 @@ ul {
 
 .our-webcoderskull .cnt-block p {
   color: #2a2a2a;
-  font-size: 13px;
+  font-size: 18px;
   line-height: 20px;
   font-weight: 400;
 }

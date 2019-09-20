@@ -4,8 +4,6 @@ const bodyParser = require("body-parser");
 const upload = require("./controllers/uploaderController");
 const { mongoose } = require("./db.js");
 var userController = require("./controllers/userController");
-//var loginController = require("./controllers/loginController");
-// var registerController = require("./controllers/registerController");
 var requestController = require("./controllers/requestController");
 
 var app = express();

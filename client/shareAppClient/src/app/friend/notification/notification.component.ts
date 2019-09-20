@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
 @Component({
@@ -9,49 +8,63 @@ import { Router } from "@angular/router";
   styleUrls: ["./notification.component.css"]
 })
 export class NotificationComponent implements OnInit {
+  pending: any = [];
   reqAlready = null;
-  notificationForm: FormGroup;
   isPresent: any;
-  username: String;
-  useremail: any;
   user: any;
   name: any;
   email: any;
-  set = false;
-  formvalue: any;
-  id: any;
   obj: any;
-  private pending = [];
-  constructor(
-    private http: HttpClient,
-    private fb: FormBuilder,
-    private router: Router
-  ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
-    this.notificationForm = this.fb.group({});
     this.notify();
   }
 
   notify() {
-    // this.formvalue = obj;
     this.http.get("http://localhost:3000/notification").subscribe(
       data => {
-        // console.log("data", data);
-        this.pending = data["pendingrequest"];
-        //console.log(this.pending);
-        for (let p of this.pending) {
-          this.pending.push(p.email);
-          console.log("p", p);
-        }
+        console.log(data);
+        this.pending = Object.values(data);
+        console.log(this.pending);
       },
       err => {
         console.log("err", err);
       }
     );
   }
+  acceptRequest(obj) {
+    console.log(obj);
 
+    this.http.post("http://localhost:3000/accept", obj).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log("err", err);
+      }
+    );
+  }
+  rejectRequest(obj) {
+    console.log(obj);
+    this.http.post("http://localhost:3000/reject", obj).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log("err", err);
+      }
+    );
+  }
   logout() {
     this.router.navigateByUrl("/");
+  }
+  onClick(obj) {
+    console.log(obj);
+    this.acceptRequest(obj);
+  }
+  onClick1(obj) {
+    console.log(obj);
+    this.rejectRequest(obj);
   }
 }

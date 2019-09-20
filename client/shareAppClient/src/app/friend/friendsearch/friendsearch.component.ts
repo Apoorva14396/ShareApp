@@ -55,8 +55,8 @@ export class FriendsearchComponent implements OnInit {
       .post("http://localhost:3000/requestAlready", this.formvalue)
       .subscribe(
         data => {
-          console.log("data", data["message"]);
-          this.reqAlready = data["message"];
+          console.log("data", data);
+          this.reqAlready = data;
           setTimeout(() => {
             this.reqAlready = null;
           }, 3000);

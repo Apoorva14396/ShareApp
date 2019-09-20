@@ -10,13 +10,15 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { FriendsearchComponent } from "./friendsearch/friendsearch.component";
 import { HeaderComponent } from "./header/header.component";
 import { NotificationComponent } from "./notification/notification.component";
+import { FriendlistComponent } from './friendlist/friendlist.component';
 
 @NgModule({
   declarations: [
     FrienddashboardComponent,
     FriendsearchComponent,
     HeaderComponent,
-    NotificationComponent
+    NotificationComponent,
+    FriendlistComponent
   ],
   imports: [
     CommonModule,

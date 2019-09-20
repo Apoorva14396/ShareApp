@@ -14,10 +14,10 @@
 <section class="our-webcoderskull padding-lg">
   <div class="container">
     <div class="row heading heading-icon">
-      <h2>Registered Users</h2>
+      <h2>Friend List</h2>
     </div>
     <ul class="row">
-      <li *ngFor="let p of users" class="col-12 col-md-6 col-lg-3">
+      <li *ngFor="let p of pending[0]" class="col-12 col-md-6 col-lg-3">
         <div class="cnt-block equal-hight" style="height: 349px;">
           <figure>
             <img
@@ -26,7 +26,6 @@
               alt=""
             />
             <p>{{ p.email }}</p>
-            <p>{{ p.role }}</p>
           </figure>
 
           <ul class="follow-us clearfix"></ul>
