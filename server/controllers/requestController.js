@@ -30,19 +30,69 @@ const handleSearch = (req, res) => {
   senderemail = req.email;
   receiveremail = req.body.email;
   if (senderemail == receiveremail) {
-    res.status(400).send({ message: "are you dumb" });
+    res.status(400).send("are you dumb");
   } else {
     UserModel.findOne({ email: req.body.email }, (err, user) => {
+      alreadyFriend = false;
+      for (let af of user.friendList) {
+        console.log("friendlist", user.friendList);
+        console.log("already", af.email);
+        console.log("body.email", req.body.email);
+        console.log("already  if", af.email == req.body.email);
+        if (af.email == req.body.email) {
+          alreadyFriend = true;
+          return res.send("alreadyFriend").status(401);
+        }
+      }
       if (!user) {
         res.status(400).send({ message: "cannot send" });
       } else {
-        res
-          .status(200)
-          .send({ id: user._id, email: user.email, name: user.name });
+        if (alreadyFriend === false) {
+          res
+            .status(200)
+            .send({ id: user._id, email: user.email, name: user.name });
+        }
       }
     });
   }
 };
+
+// /* Search User */
+// const handleSearch = (req, res) => {
+//   console.log(req.body.email);
+//   var a = req.body.email;
+//   // console.log("Sender's email", req.email);
+//   if (req.email == a) {
+//     res.status(400).send("Are you dumb?");
+//   } else {
+//     UserModel.findOne({ email: a }, (err, friend) => {
+//       if (err) {
+//         res.status(400).send("Not A Registered User.");
+//       } else {
+//         UserModel.findOne({ email: a }, (err, sender) => {
+//           if (err) {
+//             return res.status(401).send("You are not a registered user");
+//           }
+
+//           for (let fr of sender.friendList) {
+//             console.log(fr.email === friend.email);
+//             // if (JSON.stringify(fr.email) == friend.email) {
+//             //   console.log(typeof JSON.stringify(fr.email));
+//             //   console.log(typeof friend.email);
+//             // }
+//           }
+//         });
+//         // res.status(200).send({
+//         //   id: user._id,
+//         //   email: user.email,
+//         //   name: user.name,
+//         //   friendList: user.friendList
+//         // });
+//         // console.log("user.FriendList", user.friendList);
+//       }
+//     });
+//   }
+// };
 
 /* Send Request */
 const requestAlready = (req, res) => {
@@ -137,12 +187,14 @@ const notification = (req, res) => {
 /* Accept Request */
 const acceptRequest = (req, res) => {
   console.log("body", req.body);
+  console.log("email", req.email);
+  console.log("name", req.name);
   UserModel.updateOne(
     { email: req.email },
     {
+      $pull: { pendingrequest: { email: req.body } },
       $push: { friendList: { email: req.body } },
-      $inc: { totalRequest: 1 },
-      $pull: { pendingrequest: { email: req.body } }
+      $inc: { totalRequest: 1 }
     },
 
     (err, user) => {
@@ -189,13 +241,13 @@ const rejectRequest = (req, res) => {
 /* Display Friend List */
 const getFriends = (req, res) => {
   console.log(req.email);
-  UserModel.findOne({ email: req.email }, (err, friend) => {
-    if (!friend) {
+  UserModel.findOne({ email: req.email }, (err, sender) => {
+    if (!sender) {
       res.status(400).send({ message: "noo" });
     } else {
-      console.log(friend.friendList);
-      console.log(typeof friend.friendList);
-      res.status(200).send({ friendList: friend.friendList });
+      console.log(sender.friendList);
+      console.log(typeof sender.friendList);
+      res.status(200).send({ friendList: sender.friendList });
     }
   });
 };
@@ -205,7 +257,7 @@ const getUsers = (req, res) => {
   console.log("email", req.email);
   UserModel.find(
     {},
-    { email: 1, role: 1, emailVerified: 1, _id: 0 },
+    { email: 1, role: 1, emailVerified: 1, _id: 0, name: 1 },
     (err, user) => {
       if (!user) {
         //res.status(400).send({ message: "noo" });
@@ -230,4 +282,5 @@ router.post("/accept", verifyToken, acceptRequest);
 router.post("/reject", verifyToken, rejectRequest);
 router.get("/friends", verifyToken, getFriends);
 router.get("/users", verifyToken, getUsers);
+// router.get("/friendAlready", verifyToken, friendAlready);
 module.exports = router;

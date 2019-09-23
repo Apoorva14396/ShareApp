@@ -1,13 +1,13 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { WelcomeComponent } from "./welcome/welcome.component";
 import { UploadPhotoComponent } from "./upload-photo/upload-photo.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: WelcomeComponent
+    component: DashboardComponent
   },
   {
     path: "photo",

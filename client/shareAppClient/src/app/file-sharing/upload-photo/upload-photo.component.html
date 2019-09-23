@@ -1,17 +1,20 @@
-<link
+<router-outlet></router-outlet>
+<!-- <app-header></app-header> -->
+<!-- <link
   rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
   crossorigin="anonymous"
-/>
-<div class="container">
+/> -->
+
+<!-- <div class="container">
   <div class="row">
     <div class="col-md-6 m-auto">
       <h1 class="text-center display-4 my-4">Upload photos</h1>
       <form
         #f
         action="/upload"
-        onSubmit="details(f)"
+        
         method="POST"
         enctype="multipart/form-data"
       >
@@ -19,9 +22,9 @@
           <input type="file" name="file" id="file" class="custom-file-input" />
           <label for="file" class="custom-file-label">Choose File</label>
         </div>
-        <input type="submit" value="Submit" class="btn btn-primary btn-block" />
-      </form>
-      <!-- <% if(files){ %> <% files.forEach(function(file){ %>
+        <button type="button" value="Submit" class="btn btn-primary btn-block"  (onclick)="details(f)"/>
+      </form> -->
+<!-- <% if(files){ %> <% files.forEach(function(file){ %>
       <div class="card card-body mb-3">
         <% if(file.isImage){ %>
         <img src="image/<%= file.filename %>" alt="" />
@@ -35,6 +38,6 @@
       <% }) %> <%} else{ %>
       <p>No files to show</p>
       <% } %> -->
-    </div>
+<!-- </div>
   </div>
-</div>
+</div> -->

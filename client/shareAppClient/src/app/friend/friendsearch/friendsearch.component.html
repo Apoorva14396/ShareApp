@@ -17,6 +17,9 @@
       </div>
       <h2><b>Friend Finder </b></h2>
       <div class="searchForm-content">
+        <div class="alert alert-danger text-center" *ngIf="error">
+          <p>{{ error }}</p>
+        </div>
         <div class="searchForm container1">
           <h3><label>Search User by email id</label></h3>
           <br />
@@ -35,7 +38,7 @@
               <button class="btn btn-primary" type="submit">Find User</button>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group" *ngIf="!alreadyF">
               <span *ngIf="isPresent">
                 <h3><p>User has been searched</p></h3>
                 <h3>Want to send Friend Request?</h3>
@@ -47,6 +50,9 @@
               <span *ngIf="set">
                 <h3>Request has been sent</h3>
               </span>
+            </div>
+            <div class="form-group" *ngIf="alreadyF">
+              <p>We are Already Friends</p>
             </div>
           </form>
         </div>

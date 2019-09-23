@@ -35,7 +35,6 @@ export class NotificationComponent implements OnInit {
   }
   acceptRequest(obj) {
     console.log(obj);
-
     this.http.post("http://localhost:3000/accept", obj).subscribe(
       data => {
         console.log(data);

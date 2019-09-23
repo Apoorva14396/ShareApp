@@ -5,7 +5,7 @@ const upload = require("./controllers/uploaderController");
 const { mongoose } = require("./db.js");
 var userController = require("./controllers/userController");
 var requestController = require("./controllers/requestController");
-
+var uploaderController = require("./controllers/uploaderController");
 var app = express();
 /////
 app.use(cors());
@@ -17,3 +17,4 @@ app.listen(3000, () => {
 app.use("/", userController);
 //app.use("/", loginController);
 app.use("/", requestController);
+app.use("/", uploaderController);

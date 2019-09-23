@@ -25,17 +25,20 @@
               class="img-responsive"
               alt=""
             />
+            <b
+              ><p>{{ p.name }}</p></b
+            >
             <p>{{ p.email }}</p>
           </figure>
-
-          <button class="button" (click)="onClick(p.email)">
-            Accept
-          </button>
-          <button class="button2" (click)="onClick1(p.email)">
-            Reject
-          </button>
-
-          <ul class="follow-us clearfix"></ul>
+          <div class="container">
+            <button class="button" (click)="onClick(p.email)">
+              Accept
+            </button>
+            <button class="button2" (click)="onClick1(p.email)">
+              Reject
+            </button>
+            <ul class="follow-us clearfix"></ul>
+          </div>
         </div>
       </li>
     </ul>

@@ -18,6 +18,8 @@ export class FriendsearchComponent implements OnInit {
   user: any;
   name: any;
   set = false;
+  alreadyF = false;
+  error = null;
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
@@ -36,15 +38,26 @@ export class FriendsearchComponent implements OnInit {
   }
   details(obj) {
     this.formvalue = obj;
-    console.log(this.formvalue);
+    // console.log(this.formvalue);
     this.http
       .post("http://localhost:3000/searchUser", this.formvalue)
       .subscribe(
         data => {
+          console.log(data);
           this.isPresent = true;
         },
         err => {
           console.log(err);
+          if (err.status === 400) {
+            this.error = err.error;
+            setTimeout(() => {
+              this.error = null;
+            }, 3000);
+            if (err.status === 401) {
+              this.alreadyF = true;
+              console.log(this.alreadyF);
+            }
+          }
         }
       );
   }
@@ -70,9 +83,20 @@ export class FriendsearchComponent implements OnInit {
         }
       );
   }
+  alreadyFriend() {
+    this.http.get("http://localhost:3000/friendAlready").subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log("err", err);
+      }
+    );
+  }
 
   onSubmit() {
     this.details(this.searchForm.value);
+    // this.alreadyFriend();
   }
 
   onClick() {

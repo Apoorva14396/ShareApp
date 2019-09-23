@@ -55,7 +55,7 @@ const searchHandler = (req, res) => {
   gfs.files.find().toArray((err, files) => {
     // Check if files
     if (!files || files.length === 0) {
-      res.render("index", { files: false });
+      //res.render("index", { files: false });
     } else {
       files.map(file => {
         if (
@@ -67,7 +67,11 @@ const searchHandler = (req, res) => {
           file.isImage = false;
         }
       });
-      res.render("index", { files: files });
+      res.status(err.status || 500);
+      res.json({
+        message: err.message,
+        error: err
+      });
     }
   });
 };
@@ -77,6 +81,7 @@ const searchHandler = (req, res) => {
 const uploadHandler =
   // ,
   (req, res) => {
+    console.log("Hiii");
     console.log(req.body);
     console.log(uploadHandler);
   };
@@ -119,7 +124,7 @@ const deleteHandler = (req, res) => {
 };
 
 router.get("/uploads", searchHandler);
-router.post("/upload", upload.single("file"), uploadHandler);
+router.post("/upload", uploadHandler);
 router.get("/image/:filename", displayHandler);
 router.delete("/files/:id", deleteHandler);
 module.exports = router;

@@ -1,3 +1,49 @@
+<!-- <app-header></app-header>
+<button
+  type="button"
+  class="btn btn-primary navbar-brand btn-block"
+  routerLink="/friend"
+>
+  Back
+</button>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+
+<section class="our-webcoderskull padding-lg">
+  <div class="container">
+    <div class="row heading heading-icon">
+      <h2>Registered Users</h2>
+    </div>
+    <ul class="row">
+      <li *ngFor="let p of users" class="col-12 col-md-6 col-lg-3">
+        <div class="cnt-block equal-hight" style="height: 349px;">
+          <figure>
+            <img
+              src="http://www.webcoderskull.com/img/team4.png"
+              class="img-responsive"
+              alt=""
+            />
+            <p>{{ p.name }}</p>
+            <p>{{ p.email }}</p>
+          </figure>
+          <div class="container">
+            <button class="button" (click)="onClick(p.email)">
+              Block
+            </button>
+            <button class="button2" (click)="onClick1(p.email)">
+              Unblock
+            </button>
+            <ul class="follow-us clearfix"></ul>
+          </div>
+          <ul class="follow-us clearfix"></ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+<app-footer></app-footer> -->
 <app-header></app-header>
 <button
   type="button"
@@ -25,11 +71,20 @@
               class="img-responsive"
               alt=""
             />
+            <b
+              ><p>{{ p.name }}</p></b
+            >
             <p>{{ p.email }}</p>
-            <p>{{ p.role }}</p>
           </figure>
-
-          <ul class="follow-us clearfix"></ul>
+          <div class="container">
+            <button class="button" (click)="onClick(p.email)">
+              Block
+            </button>
+            <button class="button2" (click)="onClick1(p.email)">
+              Unblock
+            </button>
+            <ul class="follow-us clearfix"></ul>
+          </div>
         </div>
       </li>
     </ul>

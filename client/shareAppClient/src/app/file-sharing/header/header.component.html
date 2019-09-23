@@ -11,10 +11,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand">Friend Request</a>
-      <a class="navbar-brand" routerLink="/search"> Search Friend</a>
-      <a class="navbar-brand" routerLink="/list"> Friend list</a>
-      <a class="navbar-brand" routerLink="/notification"> Notifications</a>
+      <a class="navbar-brand" href="#">File Sharing</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -22,16 +19,11 @@
           <button class="btn btn-success" disabled>
             <span class="glyphicon glyphicon-user"></span>{{ username }}
           </button>
-          <button class="btn btn-primary" (click)="logout()">Logout</button>
+          <button class="btn btn-primary" (click)="logOut()">
+            <span class="glyphicon glyphicon-off"></span>Logout
+          </button>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<!-- <button
-  type="button"
-  class="btn btn-primary navbar-brand btn-block"
-  routerLink="/user/dashboard"
->
-  Back
-</button> -->

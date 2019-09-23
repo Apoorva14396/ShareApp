@@ -12,20 +12,25 @@ var UserModel = mongoose.model(
     emailVerified: { type: Boolean, default: false },
     emailToken: { type: String, default: null },
     sentRequest: [
-      { name: { type: String }, email: { type: String, default: "" } }
+      {
+        name: { type: String },
+        email: { type: String, default: "", unique: true }
+      }
     ],
     pendingrequest: [
       {
         // userId: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
         name: { type: String },
-        email: { type: Array, default: "" }
+        email: { type: Array, default: "", unique: true }
       }
     ],
     friendList: [
-      { name: { type: String }, email: { type: Array, default: "" } }
+      {
+        name: { type: String },
+        email: { type: Array, default: "", unique: true }
+      }
     ],
-    totalRequest: { type: Number, default: 0 },
-    notification: [{ type: { type: String }, body: { type: String } }]
+    totalRequest: { type: Number, default: 0 }
   },
   "users"
 );
