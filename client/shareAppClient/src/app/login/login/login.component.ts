@@ -4,13 +4,14 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { AuthService } from "../../auth.service";
 import { NameService } from "../../name.service";
-
+import { environment } from "../../../environments/environment";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
+  server: string = environment.URL;
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.formval = data1;
 
     // console.log(this.formval);
-    this.http.post("http://localhost:3000/login", this.formval).subscribe(
+    this.http.post("http://localhost:3001/login", this.formval).subscribe(
       data => {
         localStorage.setItem("token", data["token"]);
         this.detailsobj = data;

@@ -16,7 +16,7 @@ export class FriendlistComponent implements OnInit {
     this.getFriends();
   }
   getFriends() {
-    this.http.get("http://localhost:3000/friends").subscribe(
+    this.http.get("http://localhost:3001/friends").subscribe(
       data => {
         console.log(data);
         this.pending = Object.values(data);

@@ -17,7 +17,7 @@ export class UsermanagementComponent implements OnInit {
     this.getUsers();
   }
   getUsers() {
-    this.http.get("http://localhost:3000/users").subscribe(
+    this.http.get("http://localhost:3001/users").subscribe(
       data => {
         console.log(data);
         this.users = data;
@@ -29,9 +29,12 @@ export class UsermanagementComponent implements OnInit {
     );
   }
   blockUser(obj) {
-    this.http.post("http://localhost:3000/blockUser", obj).subscribe(
+    console.log("hi from data");
+    this.http.post("http://localhost:3001/blockUser", obj).subscribe(
       data => {
         console.log(data);
+        this.users = data;
+        console.log(this.users);
       },
       err => {
         console.log("err", err);
@@ -39,9 +42,11 @@ export class UsermanagementComponent implements OnInit {
     );
   }
   unblockUser(obj) {
-    this.http.post("http://localhost:3000/unblockUser", obj).subscribe(
+    this.http.post("http://localhost:3001/unblockUser", obj).subscribe(
       data => {
         console.log(data);
+        this.users = data;
+        console.log(this.users);
       },
       err => {
         console.log("err", err);

@@ -1,20 +1,20 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const upload = require("./controllers/uploaderController");
 const { mongoose } = require("./db.js");
 var userController = require("./controllers/userController");
 var requestController = require("./controllers/requestController");
 var uploaderController = require("./controllers/uploaderController");
+
 var app = express();
 /////
 app.use(cors());
 
+port = 3001;
 app.use(bodyParser.json());
-app.listen(3000, () => {
-  console.log("Server started at port 3000");
+app.listen(port, () => {
+  console.log(`server started at ${port}`);
 });
 app.use("/", userController);
-//app.use("/", loginController);
 app.use("/", requestController);
 app.use("/", uploaderController);

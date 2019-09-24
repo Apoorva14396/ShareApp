@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
   }
   details(data1) {
     this.formval = data1;
-    this.http.post("http://localhost:3000/register", this.formval).subscribe(
+    this.http.post("http://localhost:3001/register", this.formval).subscribe(
       data => {
         // this.detailsobj = data;
         // console.log(this.detailsobj);

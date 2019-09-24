@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   }
   ngOnInit() {
     this.newfunc();
-    this.http.get("http://localhost:3000/user/dashboard").subscribe(
+    this.http.get("http://localhost:3001/user/dashboard").subscribe(
       res => {
         console.log(res);
       },

@@ -1,0 +1,84 @@
+<router-outlet></router-outlet>
+<app-header></app-header>
+<button
+  type="button"
+  class="btn btn-primary navbar-brand btn-block"
+  routerLink="/user/dashboard"
+>
+  Back
+</button>
+<div class="container-fluid">
+  <h1 style="text-align: center;">File Upload</h1>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="row card">
+        <div class="col-sm-12">
+          <h4>Single File</h4>
+          <div>
+            <input type="file" name="image" (change)="selectImage($event)" />
+          </div>
+          <div>
+            <div class="row ">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-4">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  (click)="onSubmit()"
+                  *ngIf="!singleUpload"
+                >
+                  Upload
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  (click)="onSubmit()"
+                  *ngIf="singleUpload"
+                >
+                  Uploaded
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row card">
+        <div class="col-sm-12">
+          <h4>Multiple Files</h4>
+          <div>
+            <input
+              type="file"
+              name="images"
+              multiple
+              (change)="selectMultipleImage($event)"
+            />
+          </div>
+          <div>
+            <div class="row ">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-4">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  (click)="onMultipleSubmit()"
+                  *ngIf="!multipleUpload"
+                >
+                  Upload
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  (click)="onSubmit()"
+                  *ngIf="multipleUpload"
+                >
+                  Uploaded
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

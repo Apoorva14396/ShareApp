@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-// import { Router } from "@angular/router";
+import { Router } from "@angular/router";
 
-// import { AuthService } from "../../auth.service";
-// import { NameService } from "../../name.service";
+import { AuthService } from "../../auth.service";
+import { NameService } from "../../name.service";
 
 @Component({
   selector: "app-dashboard",
@@ -10,19 +10,14 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
-  // username: string;
-  // useremail: string;
-  constructor() // private router: Router,
-  // private authService: AuthService,
-  // private nameService: NameService
-  {}
-  // logOut() {
-  //   this.router.navigateByUrl("/login");
-  //   this.authService.logout();
-  // }
-  // newfunc() {
-  //   this.username = JSON.stringify(localStorage.getItem("key"));
-  //   this.useremail = JSON.stringify(localStorage.getItem("key1"));
-  // }
-  ngOnInit() {}
+  username: string;
+
+  constructor(private router: Router, private authService: AuthService) {}
+
+  newfunc() {
+    this.username = localStorage.getItem("key");
+  }
+  ngOnInit() {
+    this.newfunc();
+  }
 }

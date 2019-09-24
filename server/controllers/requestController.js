@@ -32,67 +32,31 @@ const handleSearch = (req, res) => {
   if (senderemail == receiveremail) {
     res.status(400).send("are you dumb");
   } else {
-    UserModel.findOne({ email: req.body.email }, (err, user) => {
+    UserModel.findOne({ email: req.email }, (err, sender) => {
       alreadyFriend = false;
-      for (let af of user.friendList) {
-        console.log("friendlist", user.friendList);
-        console.log("already", af.email);
-        console.log("body.email", req.body.email);
+      for (let af of sender.friendList) {
+        console.log("checking");
+        console.log("sender's friendlist", sender.friendList);
+        console.log("already friend of sender", af.email);
+        // console.log("body.email", req.body.email);
         console.log("already  if", af.email == req.body.email);
         if (af.email == req.body.email) {
           alreadyFriend = true;
-          return res.send("alreadyFriend").status(401);
+          return res.status(401).send("alreadyFriend");
         }
       }
-      if (!user) {
+      if (!sender) {
         res.status(400).send({ message: "cannot send" });
       } else {
         if (alreadyFriend === false) {
           res
             .status(200)
-            .send({ id: user._id, email: user.email, name: user.name });
+            .send({ id: sender._id, email: sender.email, name: sender.name });
         }
       }
     });
   }
 };
-
-// /* Search User */
-// const handleSearch = (req, res) => {
-//   console.log(req.body.email);
-//   var a = req.body.email;
-//   // console.log("Sender's email", req.email);
-//   if (req.email == a) {
-//     res.status(400).send("Are you dumb?");
-//   } else {
-//     UserModel.findOne({ email: a }, (err, friend) => {
-//       if (err) {
-//         res.status(400).send("Not A Registered User.");
-//       } else {
-//         UserModel.findOne({ email: a }, (err, sender) => {
-//           if (err) {
-//             return res.status(401).send("You are not a registered user");
-//           }
-
-//           for (let fr of sender.friendList) {
-//             console.log(fr.email === friend.email);
-//             // if (JSON.stringify(fr.email) == friend.email) {
-//             //   console.log(typeof JSON.stringify(fr.email));
-//             //   console.log(typeof friend.email);
-//             // }
-//           }
-//         });
-//         // res.status(200).send({
-//         //   id: user._id,
-//         //   email: user.email,
-//         //   name: user.name,
-//         //   friendList: user.friendList
-//         // });
-//         // console.log("user.FriendList", user.friendList);
-//       }
-//     });
-//   }
-// };
 
 /* Send Request */
 const requestAlready = (req, res) => {
@@ -177,8 +141,8 @@ const notification = (req, res) => {
     if (!friend) {
       res.status(400).send({ message: "noo" });
     } else {
-      console.log(friend.pendingrequest);
-      console.log(typeof friend.pendingrequest);
+      //console.log(friend.pendingrequest);
+      // console.log(typeof friend.pendingrequest);
       res.status(200).send({ pendingrequest: friend.pendingrequest });
     }
   });
@@ -274,6 +238,38 @@ const getUsers = (req, res) => {
     }
   );
 };
+const blockUser = (req, res) => {
+  console.log("hi");
+  console.log(req.body);
+  console.log(req.body.email);
+  UserModel.findOneAndUpdate(
+    { email: req.body.email },
+    { $set: { emailVerified: false } },
+    (err, data) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send("User access denied");
+      }
+    }
+  );
+};
+
+const unblockUser = (req, res) => {
+  UserModel.findOneAndUpdate(
+    { email: req.body.email },
+    { $set: { emailVerified: true } },
+    (err, data) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send("User access restored");
+      }
+    }
+  );
+};
+/* Routes */
+
 /* Routes */
 router.post("/searchUser", verifyToken, handleSearch);
 router.post("/requestAlready", verifyToken, requestAlready);
@@ -282,5 +278,6 @@ router.post("/accept", verifyToken, acceptRequest);
 router.post("/reject", verifyToken, rejectRequest);
 router.get("/friends", verifyToken, getFriends);
 router.get("/users", verifyToken, getUsers);
-// router.get("/friendAlready", verifyToken, friendAlready);
+router.post("/blockUser", verifyToken, blockUser);
+router.post("/unblockUser", verifyToken, unblockUser);
 module.exports = router;

@@ -19,7 +19,6 @@ var UserModel = mongoose.model(
     ],
     pendingrequest: [
       {
-        // userId: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
         name: { type: String },
         email: { type: Array, default: "", unique: true }
       }

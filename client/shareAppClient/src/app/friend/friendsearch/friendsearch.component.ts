@@ -40,7 +40,7 @@ export class FriendsearchComponent implements OnInit {
     this.formvalue = obj;
     // console.log(this.formvalue);
     this.http
-      .post("http://localhost:3000/searchUser", this.formvalue)
+      .post("http://localhost:3001/searchUser", this.formvalue)
       .subscribe(
         data => {
           console.log(data);
@@ -53,10 +53,10 @@ export class FriendsearchComponent implements OnInit {
             setTimeout(() => {
               this.error = null;
             }, 3000);
-            if (err.status === 401) {
-              this.alreadyF = true;
-              console.log(this.alreadyF);
-            }
+          }
+          if (err.status === 401) {
+            this.alreadyF = true;
+            console.log(this.alreadyF);
           }
         }
       );
@@ -65,7 +65,7 @@ export class FriendsearchComponent implements OnInit {
     this.formvalue = obj;
     console.log(this.formvalue);
     this.http
-      .post("http://localhost:3000/requestAlready", this.formvalue)
+      .post("http://localhost:3001/requestAlready", this.formvalue)
       .subscribe(
         data => {
           console.log("data", data);
@@ -84,7 +84,7 @@ export class FriendsearchComponent implements OnInit {
       );
   }
   alreadyFriend() {
-    this.http.get("http://localhost:3000/friendAlready").subscribe(
+    this.http.get("http://localhost:3001/friendAlready").subscribe(
       data => {
         console.log(data);
       },

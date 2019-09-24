@@ -1,130 +1,53 @@
 const express = require("express");
-const path = require("path");
-const crypto = require("crypto");
-const mongoose = require("mongoose");
-const GridFsStorage = require("multer-gridfs-storage");
-const Grid = require("gridfs-stream");
+const cors = require("cors");
 const multer = require("multer");
-const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
-
+var router = express.Router;
 const app = express();
-
-var router = express.Router();
+app.use(cors({ origin: "*" }));
 app.use(bodyParser.json());
-app.use(methodOverride("_method"));
-
-//URL
-const mongoURI = "mongodb://localhost:27017/shareapp";
-//create connection
-
-const conn = mongoose.createConnection(mongoURI);
-
-let gfs;
-conn.once("open", () => {
-  // init stream
-  console.log("Hiiii");
-  gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection("uploads");
+app.listen(3000, () => {
+  console.log("server started");
 });
 
-// Create storage engine
-const storage = new GridFsStorage({
-  url: mongoURI,
-  file: (req, file) => {
-    return new Promise((resolve, reject) => {
-      crypto.randomBytes(16, (err, buf) => {
-        if (err) {
-          return reject(err);
-        }
-        const filename = buf.toString("hex") + path.extname(file.originalname);
-        const fileInfo = {
-          filename: filename,
-          bucketName: "uploads"
-        };
-        resolve(fileInfo);
-      });
-    });
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "./uploads/");
+  },
+  filename: (req, file, callback) => {
+    callback(null, `${file.originalname}`);
   }
 });
-const upload = multer({ storage });
+var upload = multer({ storage: storage });
 
-// @route GET /
-// @desc Loads form
-const searchHandler = (req, res) => {
-  gfs.files.find().toArray((err, files) => {
-    // Check if files
-    if (!files || files.length === 0) {
-      //res.render("index", { files: false });
-    } else {
-      files.map(file => {
-        if (
-          file.contentType === "image/jpeg" ||
-          file.contentType === "image/png"
-        ) {
-          file.isImage = true;
-        } else {
-          file.isImage = false;
-        }
-      });
-      res.status(err.status || 500);
-      res.json({
-        message: err.message,
-        error: err
-      });
-    }
-  });
-};
-
-// @route POST /upload
-// @desc  Uploads file to DB
-const uploadHandler =
-  // ,
-  (req, res) => {
-    console.log("Hiii");
-    console.log(req.body);
-    console.log(uploadHandler);
-  };
-
-// @route GET /image/:filename
-// @desc Display Image
-
-const displayHandler = (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    // Check if file
-    if (!file || file.length === 0) {
-      return res.status(404).json({
-        err: "No file exists"
-      });
-    }
-
-    // Check if image
-    if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
-      // Read output to browser
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
-    } else {
-      res.status(404).json({
-        err: "Not an image"
-      });
-    }
-  });
-};
-
-// @route DELETE /files/:id
-// @desc  Delete file
-const deleteHandler = (req, res) => {
-  gfs.remove({ _id: req.params.id, root: "uploads" }, (err, gridStore) => {
-    if (err) {
-      return res.status(404).json({ err: err });
-    }
-
-    res.redirect("/");
-  });
-};
-
-router.get("/uploads", searchHandler);
-router.post("/upload", uploadHandler);
-router.get("/image/:filename", displayHandler);
-router.delete("/files/:id", deleteHandler);
+app.get("/", (req, res) => {
+  res.send(
+    `<h1 style="text-align:center">
+      Welcome to Image Uploads
+      <br />
+      <br />
+      <b style="font-size:182px;">😃👻</b>
+    </h1>`
+  );
+});
+app.post("/file", upload.single("file"), (req, res, next) => {
+  const file = req.file;
+  console.log(file.filename);
+  if (!file) {
+    const error = new Error("No File");
+    error.httpStatusCode = 400;
+    return next(error);
+  }
+  res.send(file);
+});
+app.post("/multipleFiles", upload.array("files"), (req, res, next) => {
+  const files = req.files;
+  console.log(files);
+  if (!files) {
+    const error = new Error("No File");
+    error.httpStatusCode = 400;
+    return next(error);
+  }
+  res.send({ status: "ok" });
+});
 module.exports = router;

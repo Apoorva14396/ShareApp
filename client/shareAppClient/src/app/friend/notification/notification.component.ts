@@ -22,7 +22,7 @@ export class NotificationComponent implements OnInit {
   }
 
   notify() {
-    this.http.get("http://localhost:3000/notification").subscribe(
+    this.http.get("http://localhost:3001/notification").subscribe(
       data => {
         console.log(data);
         this.pending = Object.values(data);
