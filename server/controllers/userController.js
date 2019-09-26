@@ -3,17 +3,34 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const nodeMailer = require("../utils/nodeMailer");
 const saltRounds = 10;
+const upload = require("../middleware/uploadProfile");
+
+const Grid = require("gridfs-stream");
+
+var mongoose = require("mongoose");
 
 var router = express.Router();
+const mongoURI = "mongodb://127.0.0.1:27017/shareapp";
+const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true });
+let gfs;
+
+conn.once("open", () => {
+  // Init Stream
+  gfs = Grid(conn.db, mongoose.mongo);
+
+  gfs.collection("uploads");
+});
 
 var { UserModel } = require("../models/userModel.js");
 const handleRegister = async (req, res) => {
+  console.log(req.file);
   hash = await bcrypt.hash(req.body.password, saltRounds);
 
   var user = new UserModel({
     name: req.body.name,
     dob: req.body.dob,
     email: req.body.email,
+    image: req.file.filename,
     password: hash
   });
 
@@ -59,7 +76,10 @@ const handleLogin = (req, res) => {
         token: token,
         name: user.name,
         email: user.email,
-        pendingrequest: user.pendingrequest
+        image: user.image,
+        friendList: user.friendList,
+        pendingrequest: user.pendingrequest,
+        sentRequest: user.sentRequest
       });
     } else if (!user) {
       res.status(401).send({ message: "email doesn't exist" });
@@ -89,12 +109,44 @@ const verifyToken = (req, res, next) => {
 };
 
 const handleCheck = (req, res, next) => {
-  console.log("email by header", req.email);
-  console.log("check successful");
-  res.status(200).send({ message: "you can access the application" });
+  console.log(req.email);
+  UserModel.findOne({ email: req.email })
+    .exec()
+    .then(user => {
+      if (user.length < 1) {
+        return res.status(404).send("User Not Found.");
+      } else {
+        const response = {
+          id: user._id,
+          role: user.role,
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          friendList: user.friendList,
+          pendingrequest: user.pendingrequest,
+          sentRequest: user.sentRequest
+        };
+        res.status(200).send(response);
+      }
+    })
+    .catch(err => {
+      return res.status(401).send(err.message);
+    });
 };
-
-router.post("/register", handleRegister);
+router.get("/image/:filename", (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    if (!file || file.length === 0) {
+      return res.status(404).json({ err: "No file exists" });
+    }
+    if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
+      var rs = gfs.createReadStream(file.filename);
+      rs.pipe(res);
+    } else {
+      return res.status(401).json({ err: "Not Image" });
+    }
+  });
+});
+router.post("/register", upload.single("image"), handleRegister);
 router.post("/login", handleLogin);
 router.get("/user/dashboard", verifyToken, handleCheck);
 router.get("/register/verifyemail/:token", handleMail);

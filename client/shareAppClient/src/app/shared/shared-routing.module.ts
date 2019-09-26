@@ -3,8 +3,6 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { DashboardComponent } from "../shared/dashboard/dashboard.component";
 import { FooterComponent } from "../shared/footer/footer.component";
-import { FileSharingModule } from "../file-sharing/file-sharing.module";
-import { AuthGuard } from "../auth.guard";
 
 const routes: Routes = [
   {

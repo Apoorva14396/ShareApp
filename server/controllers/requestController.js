@@ -30,7 +30,7 @@ const handleSearch = (req, res) => {
   senderemail = req.email;
   receiveremail = req.body.email;
   if (senderemail == receiveremail) {
-    res.status(400).send("are you dumb");
+    res.status(400).send("Are you dumb?");
   } else {
     UserModel.findOne({ email: req.email }, (err, sender) => {
       alreadyFriend = false;
@@ -38,7 +38,6 @@ const handleSearch = (req, res) => {
         console.log("checking");
         console.log("sender's friendlist", sender.friendList);
         console.log("already friend of sender", af.email);
-        // console.log("body.email", req.body.email);
         console.log("already  if", af.email == req.body.email);
         if (af.email == req.body.email) {
           alreadyFriend = true;
@@ -87,9 +86,7 @@ const requestAlready = (req, res) => {
           if (req.email === reqArray[cnt]) {
             console.log("Request have been already sent!");
             found = true;
-            return res
-              .status(400)
-              .send("you have already sent request to him.");
+            return res.status(400).send("You have already sent request.");
           } else {
             console.log(cnt, reqArray[cnt]);
             cnt++;
@@ -141,8 +138,6 @@ const notification = (req, res) => {
     if (!friend) {
       res.status(400).send({ message: "noo" });
     } else {
-      //console.log(friend.pendingrequest);
-      // console.log(typeof friend.pendingrequest);
       res.status(200).send({ pendingrequest: friend.pendingrequest });
     }
   });
@@ -224,7 +219,6 @@ const getUsers = (req, res) => {
     { email: 1, role: 1, emailVerified: 1, _id: 0, name: 1 },
     (err, user) => {
       if (!user) {
-        //res.status(400).send({ message: "noo" });
       } else {
         console.log(user);
         const onlyUsers = [];
@@ -238,8 +232,10 @@ const getUsers = (req, res) => {
     }
   );
 };
+
 const blockUser = (req, res) => {
   console.log("hi");
+  // console.log(req);
   console.log(req.body);
   console.log(req.body.email);
   UserModel.findOneAndUpdate(
@@ -249,7 +245,8 @@ const blockUser = (req, res) => {
       if (err) {
         res.send(err);
       } else {
-        res.send("User access denied");
+        console.log(req.body.email);
+        res.status(200).send({ message: "User access denied" });
       }
     }
   );
@@ -263,14 +260,13 @@ const unblockUser = (req, res) => {
       if (err) {
         res.send(err);
       } else {
-        res.send("User access restored");
+        res.status(200).send({ message: "User access restored" });
       }
     }
   );
 };
 /* Routes */
 
-/* Routes */
 router.post("/searchUser", verifyToken, handleSearch);
 router.post("/requestAlready", verifyToken, requestAlready);
 router.get("/notification", verifyToken, notification);
@@ -278,6 +274,6 @@ router.post("/accept", verifyToken, acceptRequest);
 router.post("/reject", verifyToken, rejectRequest);
 router.get("/friends", verifyToken, getFriends);
 router.get("/users", verifyToken, getUsers);
-router.post("/blockUser", verifyToken, blockUser);
-router.post("/unblockUser", verifyToken, unblockUser);
+router.post("/blockUser", blockUser);
+router.post("/unblockUser", unblockUser);
 module.exports = router;

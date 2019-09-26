@@ -8,9 +8,9 @@ import { Router } from "@angular/router";
   styleUrls: ["./usermanagement.component.css"]
 })
 export class UsermanagementComponent implements OnInit {
-  pending: any = [];
-  users: any;
+  users: any = [];
   obj: any;
+  pending: any = [];
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
@@ -21,7 +21,6 @@ export class UsermanagementComponent implements OnInit {
       data => {
         console.log(data);
         this.users = data;
-        console.log(this.users);
       },
       err => {
         console.log("err", err);
@@ -29,12 +28,10 @@ export class UsermanagementComponent implements OnInit {
     );
   }
   blockUser(obj) {
-    console.log("hi from data");
+    console.log(obj);
     this.http.post("http://localhost:3001/blockUser", obj).subscribe(
       data => {
         console.log(data);
-        this.users = data;
-        console.log(this.users);
       },
       err => {
         console.log("err", err);
@@ -54,11 +51,11 @@ export class UsermanagementComponent implements OnInit {
     );
   }
   onClick(obj) {
-    console.log(obj);
+    //console.log(obj);
     this.blockUser(obj);
   }
   onClick1(obj) {
-    console.log(obj);
+    // console.log(obj);
     this.unblockUser(obj);
   }
   logout() {

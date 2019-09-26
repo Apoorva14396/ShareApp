@@ -50,4 +50,5 @@ app.post("/multipleFiles", upload.array("files"), (req, res, next) => {
   }
   res.send({ status: "ok" });
 });
+
 module.exports = router;

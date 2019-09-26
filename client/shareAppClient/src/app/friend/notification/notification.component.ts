@@ -35,7 +35,7 @@ export class NotificationComponent implements OnInit {
   }
   acceptRequest(obj) {
     console.log(obj);
-    this.http.post("http://localhost:3000/accept", obj).subscribe(
+    this.http.post("http://localhost:3001/accept", obj).subscribe(
       data => {
         console.log(data);
       },
@@ -46,7 +46,7 @@ export class NotificationComponent implements OnInit {
   }
   rejectRequest(obj) {
     console.log(obj);
-    this.http.post("http://localhost:3000/reject", obj).subscribe(
+    this.http.post("http://localhost:3001/reject", obj).subscribe(
       data => {
         console.log(data);
       },

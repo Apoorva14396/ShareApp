@@ -11,6 +11,7 @@ var UserModel = mongoose.model(
     role: { type: String, default: "user" },
     emailVerified: { type: Boolean, default: false },
     emailToken: { type: String, default: null },
+    image: { data: Buffer, contentType: String },
     sentRequest: [
       {
         name: { type: String },
@@ -29,8 +30,10 @@ var UserModel = mongoose.model(
         email: { type: Array, default: "", unique: true }
       }
     ],
+    image: { type: String, default: false },
     totalRequest: { type: Number, default: 0 }
   },
+
   "users"
 );
 module.exports = { UserModel };

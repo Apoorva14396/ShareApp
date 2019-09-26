@@ -25,7 +25,7 @@ class Mailer {
     /*  send mail with defined transport object */
   }
   createTemplate(user, token) {
-    let url = `https://localhost:3000/register/verifyemail/${token}`;
+    let url = `https://localhost:3001/register/verifyemail/${token}`;
     this.mailOptions.html = `<p> Follow link below to verify your email token is valid for 1 hour:${user.email} 
     <a href= ${url}>Verify</a></p>`;
     this.mailOptions.text = `Follow link below to verify your email :${user.email} , 

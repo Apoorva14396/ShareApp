@@ -1,25 +1,57 @@
 <app-header></app-header>
 <div class="container-fluid ">
-  <div class="row content">
-    <h1>Welcome {{ username }}</h1>
+  <h1>Welcome {{ username }}</h1>
+  <img
+    [src]="imageURL"
+    alt=""
+    class="center"
+    style="width:200px;height:300px;"
+    *ngIf="imageURL"
+  />
+  <img
+    src="../../../assets/images/avatar.png"
+    style="width:200px;height:300px;margin-top: 30%;"
+    class="center"
+    alt="loading"
+    *ngIf="!image"
+  />
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <h2>
+          Want to Share file?
+          <br />
+          <a routerLink="/file-sharing">Share File </a>
+        </h2>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="card">
+        <h2>
+          Want to Send Friend Request?
+          <br />
+          <a routerLink="/friend">Friends</a>
+        </h2>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row card">
     <div class="col-sm-6">
       <h2>
         Want to Share file?
         <br />
-        Share file<br />
         <a routerLink="/file-sharing">Share File </a>
       </h2>
     </div>
+
     <div class="col-sm-6">
       <h2>
         Want to Send Friend Request?
         <br />
-        Friend Request
-        <br />
         <a routerLink="/friend">Friends</a>
       </h2>
     </div>
-  </div>
+  </div> -->
+  <app-footer></app-footer>
 </div>
-
-<app-footer></app-footer>
