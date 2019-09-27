@@ -11,6 +11,8 @@ export class UsermanagementComponent implements OnInit {
   users: any = [];
   obj: any;
   pending: any = [];
+  message: any;
+  userblocked = false;
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
@@ -28,10 +30,12 @@ export class UsermanagementComponent implements OnInit {
     );
   }
   blockUser(obj) {
-    console.log(obj);
-    this.http.post("http://localhost:3001/blockUser", obj).subscribe(
+    console.log(typeof obj);
+    this.http.post("http://localhost:3001/blockUser", { email: obj }).subscribe(
       data => {
         console.log(data);
+        // this.message = data;
+        // this.userblocked = true;
       },
       err => {
         console.log("err", err);
@@ -39,23 +43,21 @@ export class UsermanagementComponent implements OnInit {
     );
   }
   unblockUser(obj) {
-    this.http.post("http://localhost:3001/unblockUser", obj).subscribe(
-      data => {
-        console.log(data);
-        this.users = data;
-        console.log(this.users);
-      },
-      err => {
-        console.log("err", err);
-      }
-    );
+    this.http
+      .post("http://localhost:3001/unblockUser", { email: obj })
+      .subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          console.log("err", err);
+        }
+      );
   }
   onClick(obj) {
-    //console.log(obj);
     this.blockUser(obj);
   }
   onClick1(obj) {
-    // console.log(obj);
     this.unblockUser(obj);
   }
   logout() {

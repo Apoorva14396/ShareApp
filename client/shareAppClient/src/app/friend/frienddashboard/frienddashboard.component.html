@@ -1,23 +1,50 @@
 <router-outlet></router-outlet>
 <app-header></app-header>
-<button
-  type="button"
-  class="btn btn-primary navbar-brand btn-block"
-  routerLink="/user/dashboard"
->
-  Back
-</button>
-<h1>
-  Welcome to ShareApp Friend Request Module
-  <br />
+<div class="sidenav">
+  <a routerLink="/aboutss"
+    >About Us<span class="glyphicon glyphicon-home" aria-hidden="true"></span
+  ></a>
+
+  <a routerLink="/friend">
+    Friend<span class="glyphicon glyphicon-user" aria-hidden="true"></span
+  ></a>
+
+  <a routerLink="/search"
+    >Search Friend<span
+      class="glyphicon glyphicon-search"
+      aria-hidden="true"
+    ></span
+  ></a>
+  <a routerLink="/list">
+    Friend List<span class="glyphicon glyphicon-list" aria-hidden="true"></span
+  ></a>
+  <a routerLink="/notification"
+    >Notifications<span
+      class="glyphicon glyphicon-bell"
+      aria-hidden="true"
+    ></span
+  ></a>
+  <a routerLink="/file-sharing">
+    File Sharing<span
+      class="glyphicon glyphicon-share-alt"
+      aria-hidden="true"
+    ></span
+  ></a>
+  <a routerLink="/file-sharing/photo">
+    Upload file<span
+      class="glyphicon glyphicon-circle-arrow-up"
+      aria-hidden="true"
+    ></span
+  ></a>
+</div>
+<h1 style="padding-left: 30%;">
+  Welcome to ShareApp Friends Module
   {{ username }}
 </h1>
 <div class="row card">
   <p></p>
-  <h2>
-    <p>
-      You can search for a friend send friend request, see your notifications
-      and friend list
-    </p>
+  <h2 style="padding-left: 20%;">
+    You can search for a friend send them friend request, see your notifications
+    and friend list
   </h2>
 </div>

@@ -3,11 +3,15 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { DashboardComponent } from "../shared/dashboard/dashboard.component";
 import { FooterComponent } from "../shared/footer/footer.component";
-
+import { AboutusComponent } from "./aboutus/aboutus.component";
 const routes: Routes = [
   {
     path: "dashboard",
     component: DashboardComponent
+  },
+  {
+    path: "aboutss",
+    component: AboutusComponent
   },
 
   {

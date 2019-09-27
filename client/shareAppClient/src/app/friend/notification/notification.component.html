@@ -1,16 +1,46 @@
 <app-header></app-header>
-<button
-  type="button"
-  class="btn btn-primary navbar-brand btn-block"
-  routerLink="/friend"
->
-  Back
-</button>
+
 <link
   rel="stylesheet"
   href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 />
+<div class="sidenav">
+  <a routerLink="/aboutss"
+    >About Us<span class="glyphicon glyphicon-home" aria-hidden="true"></span
+  ></a>
 
+  <a routerLink="/friend">
+    Friend<span class="glyphicon glyphicon-user" aria-hidden="true"></span
+  ></a>
+
+  <a routerLink="/search"
+    >Search Friend<span
+      class="glyphicon glyphicon-search"
+      aria-hidden="true"
+    ></span
+  ></a>
+  <a routerLink="/list">
+    Friend List<span class="glyphicon glyphicon-list" aria-hidden="true"></span
+  ></a>
+  <a routerLink="/notification"
+    >Notifications<span
+      class="glyphicon glyphicon-bell"
+      aria-hidden="true"
+    ></span
+  ></a>
+  <a routerLink="/file-sharing">
+    File Sharing<span
+      class="glyphicon glyphicon-share-alt"
+      aria-hidden="true"
+    ></span
+  ></a>
+  <a routerLink="/file-sharing/photo">
+    Upload file<span
+      class="glyphicon glyphicon-circle-arrow-up"
+      aria-hidden="true"
+    ></span
+  ></a>
+</div>
 <section class="our-webcoderskull padding-lg">
   <div class="container">
     <div class="row heading heading-icon">
@@ -31,10 +61,16 @@
             <p>{{ p.email }}</p>
           </figure>
           <div class="container">
-            <button class="button" (click)="onClick(p.email)">
+            <button
+              class="button"
+              (click)="onClick({ email: p.email, name: p.name })"
+            >
               Accept
             </button>
-            <button class="button2" (click)="onClick1(p.email)">
+            <button
+              class="button2"
+              (click)="onClick1({ email: p.email, name: p.name })"
+            >
               Reject
             </button>
             <ul class="follow-us clearfix"></ul>

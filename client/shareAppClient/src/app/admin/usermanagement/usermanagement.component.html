@@ -16,6 +16,9 @@
     <div class="row heading heading-icon">
       <h2>Registered Users</h2>
     </div>
+    <!-- <div class="alert alert-danger" *ngIf="userblocked">
+      <p>{{ message }}</p>
+    </div> -->
     <ul class="row">
       <li *ngFor="let p of users" class="col-12 col-md-6 col-lg-3">
         <div class="cnt-block equal-hight" style="height: 349px;">
@@ -25,6 +28,7 @@
               class="img-responsive"
               alt=""
             />
+
             <b
               ><p>{{ p.name }}</p></b
             >

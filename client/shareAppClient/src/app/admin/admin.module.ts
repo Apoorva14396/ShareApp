@@ -8,6 +8,7 @@ import { AboutusComponent } from "./aboutus/aboutus.component";
 import { TermsComponent } from "./terms/terms.component";
 import { UsermanagementComponent } from "./usermanagement/usermanagement.component";
 import { HeaderComponent } from './header/header.component';
+import { GraphComponent } from './graph/graph.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HeaderComponent } from './header/header.component';
     AboutusComponent,
     TermsComponent,
     UsermanagementComponent,
-    HeaderComponent
+    HeaderComponent,
+    GraphComponent
   ],
   imports: [CommonModule, AdminRoutingModule],
   exports: [

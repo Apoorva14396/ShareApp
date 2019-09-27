@@ -15,19 +15,19 @@ var UserModel = mongoose.model(
     sentRequest: [
       {
         name: { type: String },
-        email: { type: String, default: "", unique: true }
+        email: { type: String, default: "" }
       }
     ],
     pendingrequest: [
       {
         name: { type: String },
-        email: { type: Array, default: "", unique: true }
+        email: { type: Array, default: "" }
       }
     ],
     friendList: [
       {
         name: { type: String },
-        email: { type: Array, default: "", unique: true }
+        email: { type: Array, default: "" }
       }
     ],
     image: { type: String, default: false },

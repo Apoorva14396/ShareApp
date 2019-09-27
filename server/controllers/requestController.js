@@ -146,13 +146,13 @@ const notification = (req, res) => {
 /* Accept Request */
 const acceptRequest = (req, res) => {
   console.log("body", req.body);
-  console.log("email", req.email);
-  console.log("name", req.name);
   UserModel.updateOne(
     { email: req.email },
     {
-      $pull: { pendingrequest: { email: req.body } },
-      $push: { friendList: { email: req.body } },
+      $pull: {
+        pendingrequest: { email: req.body.email[0], name: req.body.name }
+      },
+      $push: { friendList: { email: req.body.email[0], name: req.body.name } },
       $inc: { totalRequest: 1 }
     },
 
@@ -165,7 +165,7 @@ const acceptRequest = (req, res) => {
     }
   );
   UserModel.updateOne(
-    { email: req.body },
+    { email: req.body.email[0] },
     {
       $push: { friendList: { email: req.email } },
       $inc: { totalRequest: 1 }
@@ -233,6 +233,7 @@ const getUsers = (req, res) => {
   );
 };
 
+/* Block User */
 const blockUser = (req, res) => {
   console.log("hi");
   // console.log(req);
@@ -246,12 +247,13 @@ const blockUser = (req, res) => {
         res.send(err);
       } else {
         console.log(req.body.email);
-        res.status(200).send({ message: "User access denied" });
+        res.status(200).send("User access denied");
       }
     }
   );
 };
 
+/* Unblock User */
 const unblockUser = (req, res) => {
   UserModel.findOneAndUpdate(
     { email: req.body.email },
@@ -274,6 +276,6 @@ router.post("/accept", verifyToken, acceptRequest);
 router.post("/reject", verifyToken, rejectRequest);
 router.get("/friends", verifyToken, getFriends);
 router.get("/users", verifyToken, getUsers);
-router.post("/blockUser", blockUser);
-router.post("/unblockUser", unblockUser);
+router.post("/blockUser", verifyToken, blockUser);
+router.post("/unblockUser", verifyToken, unblockUser);
 module.exports = router;

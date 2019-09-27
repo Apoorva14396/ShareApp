@@ -100,8 +100,8 @@ export class FriendsearchComponent implements OnInit {
   }
 
   onClick() {
-    this.set = true;
     this.sendReq(this.searchForm.value);
+    this.set = true;
     // this.receiveReq(this.searchForm.value);
   }
 
