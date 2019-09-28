@@ -2,7 +2,7 @@
 <button
   type="button"
   class="btn btn-primary navbar-brand btn-block"
-  routerLink="/user/dashboard"
+  routerLink="/dashboard"
 >
   Back
 </button>
@@ -10,25 +10,26 @@
   rel="stylesheet"
   href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 />
-
 <section class="our-webcoderskull padding-lg">
   <div class="container">
     <div class="row heading heading-icon">
       <h2>Registered Users</h2>
     </div>
-    <!-- <div class="alert alert-danger" *ngIf="userblocked">
-      <p>{{ message }}</p>
-    </div> -->
     <ul class="row">
       <li *ngFor="let p of users" class="col-12 col-md-6 col-lg-3">
         <div class="cnt-block equal-hight" style="height: 349px;">
+          <!-- <div class="alert alert-danger" *ngIf="userblocked">
+            <p>User has been blocked</p>
+          </div>
+          <div class="alert alert-danger" *ngIf="!userblocked">
+            <p>User has been unblocked</p>
+          </div> -->
           <figure>
             <img
               src="http://www.webcoderskull.com/img/team4.png"
               class="img-responsive"
               alt=""
             />
-
             <b
               ><p>{{ p.name }}</p></b
             >
@@ -38,6 +39,7 @@
             <button class="button" (click)="onClick(p.email)">
               Block
             </button>
+
             <button class="button2" (click)="onClick1(p.email)">
               Unblock
             </button>

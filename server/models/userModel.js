@@ -31,6 +31,11 @@ var UserModel = mongoose.model(
       }
     ],
     image: { type: String, default: false },
+    uploadedFiles: [
+      {
+        name: { type: String }
+      }
+    ],
     totalRequest: { type: Number, default: 0 }
   },
 

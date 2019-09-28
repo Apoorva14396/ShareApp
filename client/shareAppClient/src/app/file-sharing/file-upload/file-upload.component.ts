@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-
 import { HttpClient } from "@angular/common/http";
-
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-file-upload",
   templateUrl: "./file-upload.component.html",
@@ -12,10 +12,22 @@ export class FileUploadComponent implements OnInit {
   singleUpload = false;
   multipleUpload = false;
   images;
+  formvalue: any;
+  searchForm: FormGroup;
   multipleImages = [];
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    {
+      this.searchForm = this.fb.group({
+        email: ["", Validators.required]
+      });
+    }
+  }
 
   selectImage(event) {
     if (event.target.files.length > 0) {
@@ -28,11 +40,9 @@ export class FileUploadComponent implements OnInit {
 
   selectMultipleImage(event) {
     if (event.target.files.length > 0) {
-      // this.multipleImages = event.target.files;
       const files = event.target.files;
       this.multipleImages = files;
       console.log(this.multipleImages);
-      //console.log(this.multipleImages.name);
     }
   }
 
@@ -40,7 +50,8 @@ export class FileUploadComponent implements OnInit {
     this.singleUpload = true;
     const formData = new FormData();
     formData.append("file", this.images);
-    this.http.post<any>("http://localhost:3000/file", formData).subscribe(
+
+    this.http.post<any>("http://localhost:3001/file", formData).subscribe(
       res => {
         console.log(res);
       },
@@ -55,7 +66,21 @@ export class FileUploadComponent implements OnInit {
       formData.append("files", img);
     }
     this.http
-      .post<any>("http://localhost:3000/multipleFiles", formData)
+      .post<any>("http://localhost:3001/multipleFiles", formData)
       .subscribe(res => console.log(res), err => console.log(err));
+  }
+  send(obj) {
+    this.formvalue = obj;
+    this.http.post("http://localhost:3001/sendFile", this.formvalue).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+  onSave() {
+    this.send(this.searchForm.value);
   }
 }

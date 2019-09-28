@@ -40,12 +40,13 @@
 
 <div class="container-fluid">
   <h1 style="text-align: center;">File Upload</h1>
+  <h3 style="text-align:center;">Upload files to share</h3>
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
       <div class="row card">
         <div class="col-sm-12">
-          <h4>Single File</h4>
+          <h4>Single File(.jpeg,.png,.mp4)</h4>
           <div>
             <input
               type="file"
@@ -54,6 +55,7 @@
               (change)="selectImage($event)"
             />
           </div>
+          <br />
           <div>
             <div class="row ">
               <div class="col-sm-4"></div>
@@ -76,12 +78,33 @@
                 </button>
               </div>
             </div>
+            <form method="POST" [formGroup]="searchForm" (ngSubmit)="onSave()">
+              <div class="form-group">
+                <label for="email"
+                  ><h3>
+                    Enter the email address with whom you want to share file
+                  </h3>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  formControlName="email"
+                  placeholder="abc@mail.com"
+                />
+                <div>
+                  <button class="btn btn-primary" type="submit">
+                    Find User
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
       <div class="row card">
         <div class="col-sm-12">
-          <h4>Multiple Files</h4>
+          <h4>Multiple Files(.jpeg,.png,.mp4)</h4>
           <div>
             <input
               type="file"
@@ -90,6 +113,7 @@
               (change)="selectMultipleImage($event)"
             />
           </div>
+
           <div>
             <div class="row ">
               <div class="col-sm-4"></div>
@@ -112,6 +136,36 @@
                 </button>
               </div>
             </div>
+            <form
+              method="POST"
+              [formGroup]="searchForm"
+              (ngSubmit)="onSubmit()"
+            >
+              <div class="form-group">
+                <label for="email"
+                  ><h3>
+                    Enter the email address with whom you want to share multiple
+                    files
+                  </h3>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  formControlName="email"
+                  placeholder="abc@mail.com"
+                />
+                <div>
+                  <button
+                    class="btn btn-primary"
+                    type="submit"
+                    (click)="onSave()"
+                  >
+                    Send File
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { ThrowStmt } from "@angular/compiler";
 
 @Component({
   selector: "app-usermanagement",
@@ -34,8 +35,7 @@ export class UsermanagementComponent implements OnInit {
     this.http.post("http://localhost:3001/blockUser", { email: obj }).subscribe(
       data => {
         console.log(data);
-        // this.message = data;
-        // this.userblocked = true;
+        this.userblocked = true;
       },
       err => {
         console.log("err", err);
@@ -48,6 +48,7 @@ export class UsermanagementComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data);
+          this.userblocked = false;
         },
         err => {
           console.log("err", err);

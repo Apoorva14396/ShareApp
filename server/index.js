@@ -8,7 +8,7 @@ var uploaderController = require("./controllers/uploaderController");
 var profilePicController = require("./controllers/profilePicController");
 
 var app = express();
-/////
+
 app.use(cors());
 
 port = 3001;

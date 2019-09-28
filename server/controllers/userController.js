@@ -17,7 +17,6 @@ let gfs;
 conn.once("open", () => {
   // Init Stream
   gfs = Grid(conn.db, mongoose.mongo);
-
   gfs.collection("uploads");
 });
 
@@ -146,6 +145,7 @@ router.get("/image/:filename", (req, res) => {
     }
   });
 });
+
 router.post("/register", upload.single("image"), handleRegister);
 router.post("/login", handleLogin);
 router.get("/user/dashboard", verifyToken, handleCheck);

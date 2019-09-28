@@ -71,7 +71,7 @@ export class GraphComponent implements OnInit {
       data: {
         datasets: [
           {
-            data: [1, 2, 1, 1, 1, 1, 1],
+            data: [0, 3, 1, 1, 1, 1, 1],
             backgroundColor: [
               "red",
               "orange",
@@ -80,8 +80,7 @@ export class GraphComponent implements OnInit {
               "pink",
               "blue",
               "purple"
-            ],
-            label: "Dataset 1"
+            ]
           }
         ],
         labels: [

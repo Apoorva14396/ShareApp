@@ -145,7 +145,6 @@ const notification = (req, res) => {
 
 /* Accept Request */
 const acceptRequest = (req, res) => {
-  console.log("body", req.body);
   UserModel.updateOne(
     { email: req.email },
     {
@@ -155,7 +154,6 @@ const acceptRequest = (req, res) => {
       $push: { friendList: { email: req.body.email[0], name: req.body.name } },
       $inc: { totalRequest: 1 }
     },
-
     (err, user) => {
       if (!user) {
         res.status(400).send({ message: "cannot accept" });
@@ -235,10 +233,6 @@ const getUsers = (req, res) => {
 
 /* Block User */
 const blockUser = (req, res) => {
-  console.log("hi");
-  // console.log(req);
-  console.log(req.body);
-  console.log(req.body.email);
   UserModel.findOneAndUpdate(
     { email: req.body.email },
     { $set: { emailVerified: false } },
@@ -247,7 +241,7 @@ const blockUser = (req, res) => {
         res.send(err);
       } else {
         console.log(req.body.email);
-        res.status(200).send("User access denied");
+        return res.status(200).send({ message: "User access denied" });
       }
     }
   );
@@ -262,11 +256,12 @@ const unblockUser = (req, res) => {
       if (err) {
         res.send(err);
       } else {
-        res.status(200).send({ message: "User access restored" });
+        return res.status(200).send({ message: "User access restored" });
       }
     }
   );
 };
+
 /* Routes */
 
 router.post("/searchUser", verifyToken, handleSearch);
