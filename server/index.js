@@ -20,3 +20,4 @@ app.use("/", profilePicController);
 app.use("/", userController);
 app.use("/", requestController);
 app.use("/", uploaderController);
+app.use("/uploads", express.static("uploads"));

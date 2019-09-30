@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 const jwt = require("jsonwebtoken");
 
 var router = express.Router();
@@ -13,12 +14,12 @@ const verifyToken = (req, res, next) => {
   if (token === "null") {
     return res.status(401).send("Unauthorized request");
   }
-  const payload = jwt.verify(token, "secretkey", (err, res) => {
+  const payload = jwt.verify(token, "secretkey", (err, result) => {
     if (err) {
-      return res.status(500).send("Unauthorized request");
+      return result.status(500).send("Unauthorized request");
     }
-    console.log("res", res);
-    req.email = res.user;
+    console.log("res", result);
+    req.email = result.user;
     next();
   });
 };

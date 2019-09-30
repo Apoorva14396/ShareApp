@@ -36,6 +36,11 @@ var UserModel = mongoose.model(
         name: { type: String }
       }
     ],
+    receivedFiles: [
+      {
+        name: { type: String }
+      }
+    ],
     totalRequest: { type: Number, default: 0 }
   },
 

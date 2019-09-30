@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { FileUploadComponent } from "./file-upload/file-upload.component";
+import { MyDriveComponent } from "./my-drive/my-drive.component";
 const routes: Routes = [
   {
     path: "",
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: "photo",
     component: FileUploadComponent
+  },
+  {
+    path: "uploaded",
+    component: MyDriveComponent
   }
 ];
 

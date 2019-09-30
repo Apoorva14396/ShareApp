@@ -15,6 +15,15 @@ export class FileUploadComponent implements OnInit {
   formvalue: any;
   searchForm: FormGroup;
   multipleImages = [];
+  reqAlready = null;
+  obj: any;
+  isPresent: any;
+  username: String;
+  user: any;
+  name: any;
+  set = false;
+  alreadyF = false;
+  error = null;
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
@@ -46,7 +55,7 @@ export class FileUploadComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit(obj) {
     this.singleUpload = true;
     const formData = new FormData();
     formData.append("file", this.images);
@@ -69,18 +78,47 @@ export class FileUploadComponent implements OnInit {
       .post<any>("http://localhost:3001/multipleFiles", formData)
       .subscribe(res => console.log(res), err => console.log(err));
   }
-  send(obj) {
-    this.formvalue = obj;
-    this.http.post("http://localhost:3001/sendFile", this.formvalue).subscribe(
-      data => {
-        console.log(data);
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
-  onSave() {
-    this.send(this.searchForm.value);
-  }
+  // send(obj) {
+  //   this.formvalue = obj;
+
+  //   this.http.post("http://localhost:3001/sendFile", this.formvalue).subscribe(
+  //     data => {
+  //       console.log(data);
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
+  // details(obj) {
+  //   this.formvalue = obj;
+  //   // console.log(this.formvalue);
+  //   this.http
+  //     .post("http://localhost:3001/searchUser1", this.formvalue)
+  //     .subscribe(
+  //       data => {
+  //         console.log(data);
+  //         this.isPresent = true;
+  //       },
+  //       err => {
+  //         console.log(err);
+  //         if (err.status === 400) {
+  //           this.error = err.error;
+  //           setTimeout(() => {
+  //             this.error = null;
+  //           }, 3000);
+  //         }
+  //         if (err.status === 401) {
+  //           this.alreadyF = true;
+  //           console.log(this.alreadyF);
+  //         }
+  //       }
+  //     );
+  // }
+  // onSave() {
+  //   this.send(this.searchForm.value);
+  // }
+  // onSubmit1() {
+  //   this.details(this.searchForm.value);
+  // }
 }

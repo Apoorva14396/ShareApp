@@ -58,7 +58,7 @@ export class GraphComponent implements OnInit {
         responsive: true,
         title: {
           display: true,
-          text: "Registered Users"
+          label: "Registered Users"
         },
         legend: {
           position: "top"
@@ -71,6 +71,7 @@ export class GraphComponent implements OnInit {
       data: {
         datasets: [
           {
+            label: "Registered Users",
             data: [0, 3, 1, 1, 1, 1, 1],
             backgroundColor: [
               "red",
@@ -83,15 +84,7 @@ export class GraphComponent implements OnInit {
             ]
           }
         ],
-        labels: [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ]
+        labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
       }
     });
   }

@@ -6,7 +6,7 @@ class Mailer {
     this.transporter = nodemailer.createTransport({
       host: "mail.vinove.com",
       port: 587,
-      secure: false, // true for 465, false for other ports
+      secure: false,
       auth: {
         user: "apoorva.singh@mail.vinove.com", // generated ethereal user
         pass: "apoorva@123" // generated ethereal password

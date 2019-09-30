@@ -36,6 +36,12 @@
       aria-hidden="true"
     ></span
   ></a>
+  <a routerLink="/file-sharing/uploaded">
+    My Drive<span
+      class="glyphicon glyphicon-circle-arrow-up"
+      aria-hidden="true"
+    ></span
+  ></a>
 </div>
 
 <div class="container-fluid">
@@ -78,7 +84,7 @@
                 </button>
               </div>
             </div>
-            <form method="POST" [formGroup]="searchForm" (ngSubmit)="onSave()">
+            <!-- <form method="POST" [formGroup]="searchForm" (ngSubmit)="onSave()">
               <div class="form-group">
                 <label for="email"
                   ><h3>
@@ -93,12 +99,16 @@
                   placeholder="abc@mail.com"
                 />
                 <div>
-                  <button class="btn btn-primary" type="submit">
+                  <button
+                    class="btn btn-primary"
+                    type="submit"
+                    (click)="onSave()"
+                  >
                     Find User
                   </button>
                 </div>
               </div>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
@@ -129,14 +139,14 @@
                 <button
                   type="button"
                   class="btn btn-success"
-                  (click)="onSubmit()"
+                  (click)="onMultipleSubmit()"
                   *ngIf="multipleUpload"
                 >
                   Uploaded
                 </button>
               </div>
             </div>
-            <form
+            <!-- <form
               method="POST"
               [formGroup]="searchForm"
               (ngSubmit)="onSubmit()"
@@ -165,7 +175,7 @@
                   </button>
                 </div>
               </div>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>
