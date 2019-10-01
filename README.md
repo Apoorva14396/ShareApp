@@ -60,4 +60,4 @@ TODO
 
 Admin module- analytics left.
 
-Share-file Module- sending file left.
+Share-file Module- sending file left (Shared Files).
