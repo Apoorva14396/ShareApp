@@ -54,7 +54,7 @@ const singleFile = (req, res, _next) => {
   UserModel.updateOne(
     { email: req.email },
     {
-      $push: {
+      $addToSet: {
         uploadedFiles: { name: req.file.path }
       }
     },
@@ -71,16 +71,16 @@ const singleFile = (req, res, _next) => {
 
 /* Upload Multiple Files */
 const multipleFiles = (req, res, next) => {
+  console.log("Hiiiiii");
   const files = req.files;
-
   UserModel.updateOne(
     { email: req.email },
     {
-      $push: {
+      $addToSet: {
         uploadedFiles: { name: req.files.path }
       }
     },
-    (_err, user) => {
+    (err, user) => {
       if (!user) {
         res.status(400).send({ message: "Nooo" });
       } else {
@@ -98,29 +98,21 @@ const sendFile = (req, res, next) => {
     if (err) {
       return res.status(404).send({ message: "cannot send" });
     } else {
-      console.log("sender's friendList", sender.friendList);
-      for (let request of sender.friendList) {
-        console.log(request.email[0]);
-        req1 = request.email[0];
-      }
-      if (req1 === req.body.email) {
-        console.log("Hoiiiii", req.body.email);
-        UserModel.updateOne(
-          { email: req.body.email },
-          {
-            $push: {
-              receivedFiles: { name: req.file.filename }
-            }
-          },
-          (err, updatedUser) => {
-            if (!updatedUser) {
-              res.status(400).send({ message: "noo" });
-            } else {
-              console.log("Shared successfully");
-            }
+      UserModel.updateOne(
+        { email: req.body.email },
+        {
+          $addToSet: {
+            receivedFiles: { name: req.file.filename }
           }
-        );
-      }
+        },
+        (err, updatedUser) => {
+          if (!updatedUser) {
+            res.status(400).send({ message: "noo" });
+          } else {
+            console.log("Shared successfully");
+          }
+        }
+      );
     }
   });
 };
@@ -130,6 +122,7 @@ const fetchFiles = (req, res, next) => {
     if (err) {
       console.log(err);
     } else {
+      console.log(user.uploadedFiles);
       res.status(200).send(user.uploadedFiles);
     }
   });

@@ -69,6 +69,8 @@ export class FileUploadComponent implements OnInit {
   }
 
   onMultipleSubmit() {
+    console.log("jnkshkjfsjzhk");
+
     this.multipleUpload = true;
     const formData = new FormData();
     for (let img of this.multipleImages) {

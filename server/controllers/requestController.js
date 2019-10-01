@@ -75,7 +75,6 @@ const requestAlready = (req, res) => {
         console.log("sender's email:", req.email);
         console.log("receiver's email:", req.body.email);
         console.log(friend.pendingrequest);
-
         const reqArray = [];
         for (let request of friend.pendingrequest) {
           reqArray.push(request.email[0]);
@@ -97,7 +96,7 @@ const requestAlready = (req, res) => {
           UserModel.updateOne(
             { email: req.email },
             {
-              $push: {
+              $addToSet: {
                 sentRequest: { email: req.body.email, name: friend.name }
               }
             },
@@ -105,6 +104,7 @@ const requestAlready = (req, res) => {
               if (!Updateduser) {
                 res.status(400).send({ message: "Nooo" });
               } else {
+                console.log("friend added");
                 console.log(req.body.email);
                 console.log(sender);
               }
@@ -113,7 +113,7 @@ const requestAlready = (req, res) => {
           UserModel.updateOne(
             { email: req.body.email },
             {
-              $push: {
+              $addToSet: {
                 pendingrequest: { email: req.email, name: sender.name }
               }
             },
@@ -152,7 +152,9 @@ const acceptRequest = (req, res) => {
       $pull: {
         pendingrequest: { email: req.body.email[0], name: req.body.name }
       },
-      $push: { friendList: { email: req.body.email[0], name: req.body.name } },
+      $addToSet: {
+        friendList: { email: req.body.email[0], name: req.body.name }
+      },
       $inc: { totalRequest: 1 }
     },
     (err, user) => {
@@ -166,7 +168,7 @@ const acceptRequest = (req, res) => {
   UserModel.updateOne(
     { email: req.body.email[0] },
     {
-      $push: { friendList: { email: req.email } },
+      $addToSet: { friendList: { email: req.email } },
       $inc: { totalRequest: 1 }
     },
     (err, user) => {
