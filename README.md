@@ -17,7 +17,7 @@ This app is all about sending friend requests, sharing files with your friends.
 -client run ng s -o.<br />
 -server run nodemon index.js.<br />
 
-<h3> There are two types of users dfor this Application.
+<h3> There are two types of users for this Application.
 Admin (Controller)<br />
 Users (Users)<br />
 
