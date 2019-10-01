@@ -21,7 +21,7 @@ This app is all about sending friend requests, sharing files with your friends.
 -Admin (Controller)<br />
 -Users (Users)<br />
 
-<h3>1.Admin as a Controller<br /></h3>
+<h3>1. Admin as a Controller<br /></h3>
 
 As an admin is logged in he/she will land into the dashboard where analytics can be seen.<br />
 
@@ -29,7 +29,7 @@ As an admin is logged in he/she will land into the dashboard where analytics can
 -Admin can see registered Users in **Registered Users**.<br />
 -Admin can block/Unblock registered Users in **Registered Users**.<br />
 
-<h3>2.Users<br /></h3>
+<h3>2. Users<br /></h3>
   
 <h3>As a New User.<br /></h3>
 
