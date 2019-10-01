@@ -40,14 +40,14 @@ As an admin is logged in he/she will land into the dashboard where analytics can
 -As a Registered User is logged in he/she will land into the dashboard.<br />
 -User can serach for a friend ,send them request , view friend list , user can upload files, view his uploaded files and can see files shared by him/her.<br />
 
-<h3> ShareApp as Friend Module<br /></h3>
+<h2> ShareApp as Friend Module<br /></h2>
 
 -After Logging in user is welcome to his/her dashboard, where in the side bar he can chooose any of the options available.<br />
 -User can search for a friend  and send friend request to them in Friend Finder **Search Friend**.<br />
 -User can see his/her notification in **Notifications**.<br />
 -User can see his **Friend List**.<br />
 
-<h3> ShareApp as Share-file Module<br /></h3>
+<h2> ShareApp as Share-file Module<br /></h2>
 
 -User can upload single or multiple files in **Upload File**.<br />
 -User can see his uploaded files in **My Drive**.<br />
