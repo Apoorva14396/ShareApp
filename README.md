@@ -10,7 +10,7 @@ This app is all about sending friend requests, sharing files with your friends.
 -NodeJs<br />
 -MongoDB<br />
 
-<h3> Getting Start with the Application<br />
+<h3> Getting Start with the Application<br /></h3>
   
 -git clone this repository <br />
 -npm install in both client and server directories.<br />
@@ -38,14 +38,14 @@ As an admin is logged in he/she will land into the dashboard where analytics can
 <h4>As a Registered User<br />
 
 -As a Registered User is logged in he/she will land into the dashboard.<br />
--User can serach for a friend ,send them request , view friend list , uaer can upload files, view his uploaded files and can see files shared by him/her.<br />
+-User can serach for a friend ,send them request , view friend list , user can upload files, view his uploaded files and can see files shared by him/her.<br />
 
 <h3> ShareApp as Friend Module<br />
 
 -After Logging in user is welcome to his/her dashboard, where in the side bar he can chooose any of the options available.<br />
 -User can search for a friend  and send friend request to them in Friend Finder **Search Friend**.<br />
 -User can see his/her notification in **Notifications**.<br />
--User can seee his **Friend List**.<br />
+-User can see his **Friend List**.<br />
 
 <h3> ShareApp as Share-file Module<br />
 
