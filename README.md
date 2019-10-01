@@ -10,7 +10,7 @@ This app is all about sending friend requests, sharing files with your friends.
 -NodeJs<br />
 -MongoDB<br />
 
-<h3> Getting Start with the Application<br /></h3>
+<h3> Getting Started with the Application<br /></h3>
   
 -git clone this repository <br />
 -npm install in both client and server directories.<br />
