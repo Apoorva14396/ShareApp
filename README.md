@@ -31,16 +31,16 @@ As an admin is logged in he/she will land into the dashboard where analytics can
 
 <h3> Users<br /></h3>
   
-<h4>As a New User.<br /></h4>
+<h3>As a New User.<br /></h3>
 
 -You need to Signup by clicking on signup. Once you have submit your details through nodemailer you'll get a mail to verify your token only if your email id is valid.Then you can login as Registered User.<br />
 
-<h3>- As a Registered User<br /></h3>
+<h3>As a Registered User<br /></h3>
 
 -As a Registered User is logged in he/she will land into the dashboard.<br />
 -User can serach for a friend ,send them request , view friend list , user can upload files, view his uploaded files and can see files shared by him/her.<br />
 
-<h3> ShareApp as Friend Module<br /></h3>
+<h2> ShareApp as Friend Module<br /></h2>
 
 -After Logging in user is welcome to his/her dashboard, where in the side bar he can chooose any of the options available.<br />
 -User can search for a friend  and send friend request to them in Friend Finder **Search Friend**.<br />
