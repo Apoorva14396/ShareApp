@@ -320,3 +320,11 @@ ul {
   float: right;
   padding-right: 8px;
 }
+.paginate {
+  /* background-color: white; */
+  width: 100%;
+  font-size: 26px;
+  align-self: center;
+  align-items: center;
+  text-align: center;
+}

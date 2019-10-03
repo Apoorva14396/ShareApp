@@ -16,12 +16,12 @@ const verifyToken = (req, res, next) => {
   if (token === "null") {
     return res.status(401).send("token is null Unauthorized request");
   }
-  const payload = jwt.verify(token, "secretkey", (err, res) => {
+  const payload = jwt.verify(token, "secretkey", (err, result) => {
     if (err) {
       return res.status(500).send("Unauthorized request");
     }
-    console.log("res", res);
-    req.email = res.user;
+    console.log("res", result);
+    req.email = result.user;
     next();
   });
 };
@@ -50,11 +50,12 @@ router.get("/", (_req, res) => {
 /* Upload Single File */
 const singleFile = (req, res, _next) => {
   const file = req.file;
+  console.log(req.file.path);
 
   UserModel.updateOne(
     { email: req.email },
     {
-      $addToSet: {
+      $push: {
         uploadedFiles: { name: req.file.path }
       }
     },
@@ -70,42 +71,70 @@ const singleFile = (req, res, _next) => {
 };
 
 /* Upload Multiple Files */
-const multipleFiles = (req, res, next) => {
+const multipleFiles = (req, res, _next) => {
   console.log("Hiiiiii");
-  const files = req.files;
-  UserModel.updateOne(
-    { email: req.email },
-    {
-      $addToSet: {
-        uploadedFiles: { name: req.files.path }
+  var filePath = [];
+  console.log(req.files);
+  for (let i = 0; i < req.files.length; i++) {
+    filePath.push(req.files[i].path);
+    UserModel.updateOne(
+      { email: req.email },
+      {
+        $push: {
+          uploadedFiles: { name: req.files[i].path }
+        }
+      },
+      (_err, user) => {
+        try {
+          if (!user) {
+            res.status(400).send({ message: "Nooo" });
+          } else {
+            res.status(200).send(filePath);
+            console.log("saved");
+          }
+        } catch (err) {
+          console.log(err);
+        }
       }
-    },
-    (err, user) => {
-      if (!user) {
-        res.status(400).send({ message: "Nooo" });
-      } else {
-        res.send(files);
-        console.log("saved");
-      }
-    }
-  );
+    );
+  }
 };
+/* Delete File */
+// const deleted = (req, res) => {
+//   console.log(req.file);
+//   UserModel.findOneAndUpdate(
+//     { email: req.email },
+//     {
+//       $pull: {
+//         uploadedFiles: req.file.path
+//       }
+//     },
+//     (err, doc) => {
+//       if (err) {
+//         res.status(500).send(err);
+//       } else {
+//         res.json("deleted");
+//       }
+//     }
+//   );
+// };
+
 /* Send File*/
-const sendFile = (req, res, next) => {
+const sendFile = (req, res, _next) => {
   console.log("sender's email", req.email);
-  console.log("receiver's email", req.body.email);
+  console.log("receiver's email", req.body.list);
   UserModel.findOne({ email: req.email }, (err, sender) => {
-    if (err) {
+    if (!sender) {
       return res.status(404).send({ message: "cannot send" });
     } else {
-      UserModel.updateOne(
-        { email: req.body.email },
+      UserModel.updateMany(
+        { email: { $in: req.body.list } },
         {
           $addToSet: {
-            receivedFiles: { name: req.file.filename }
+            receivedFiles: { name: req.body.value }
           }
         },
-        (err, updatedUser) => {
+        (_err, updatedUser) => {
           if (!updatedUser) {
             res.status(400).send({ message: "noo" });
           } else {
@@ -117,9 +146,10 @@ const sendFile = (req, res, next) => {
   });
 };
 
-const fetchFiles = (req, res, next) => {
+/*Fetch Files*/
+const fetchFiles = (req, res) => {
   UserModel.findOne({ email: req.email }, (err, user) => {
-    if (err) {
+    if (!user) {
       console.log(err);
     } else {
       console.log(user.uploadedFiles);
@@ -128,11 +158,27 @@ const fetchFiles = (req, res, next) => {
   });
 };
 
+/* Fetch Uploaded Files */
+const receivedFiles = (req, res) => {
+  UserModel.findOne({ email: req.email }, (err, user) => {
+    if (!user) {
+      console.log(err);
+    } else {
+      console.log(user.receivedFiles);
+      res.status(200).send(user.receivedFiles);
+    }
+  });
+};
+/* Routes */
 router.use(express.static("../uploads"));
-
 router.post("/file", verifyToken, upload.single("file"), singleFile);
-//router.post("/sendFile", verifyToken, sendFile);
-router.post("/multipleFiles", upload.array("files"), multipleFiles);
+router.post(
+  "/multipleFiles",
+  verifyToken,
+  upload.array("files"),
+  multipleFiles
+);
+router.post("/sendFile", verifyToken, sendFile);
 router.get("/fetchFiles", verifyToken, fetchFiles);
-
+router.get("/receivedFiles", verifyToken, receivedFiles);
 module.exports = router;

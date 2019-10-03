@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { FormGroup } from "@angular/forms";
 @Component({
   selector: "app-file-upload",
   templateUrl: "./file-upload.component.html",
@@ -24,19 +23,9 @@ export class FileUploadComponent implements OnInit {
   set = false;
   alreadyF = false;
   error = null;
-  constructor(
-    private http: HttpClient,
-    private fb: FormBuilder,
-    private router: Router
-  ) {}
+  constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    {
-      this.searchForm = this.fb.group({
-        email: ["", Validators.required]
-      });
-    }
-  }
+  ngOnInit() {}
 
   selectImage(event) {
     if (event.target.files.length > 0) {
@@ -45,6 +34,7 @@ export class FileUploadComponent implements OnInit {
       console.log(this.images);
       console.log(this.images.name);
     }
+    // event.srcElement.value = null;
   }
 
   selectMultipleImage(event) {
@@ -55,11 +45,10 @@ export class FileUploadComponent implements OnInit {
     }
   }
 
-  onSubmit(obj) {
+  onSubmit() {
     this.singleUpload = true;
     const formData = new FormData();
     formData.append("file", this.images);
-
     this.http.post<any>("http://localhost:3001/file", formData).subscribe(
       res => {
         console.log(res);
@@ -69,8 +58,6 @@ export class FileUploadComponent implements OnInit {
   }
 
   onMultipleSubmit() {
-    console.log("jnkshkjfsjzhk");
-
     this.multipleUpload = true;
     const formData = new FormData();
     for (let img of this.multipleImages) {
@@ -92,35 +79,8 @@ export class FileUploadComponent implements OnInit {
   //     }
   //   );
   // }
-  // details(obj) {
-  //   this.formvalue = obj;
-  //   // console.log(this.formvalue);
-  //   this.http
-  //     .post("http://localhost:3001/searchUser1", this.formvalue)
-  //     .subscribe(
-  //       data => {
-  //         console.log(data);
-  //         this.isPresent = true;
-  //       },
-  //       err => {
-  //         console.log(err);
-  //         if (err.status === 400) {
-  //           this.error = err.error;
-  //           setTimeout(() => {
-  //             this.error = null;
-  //           }, 3000);
-  //         }
-  //         if (err.status === 401) {
-  //           this.alreadyF = true;
-  //           console.log(this.alreadyF);
-  //         }
-  //       }
-  //     );
-  // }
+
   // onSave() {
   //   this.send(this.searchForm.value);
-  // }
-  // onSubmit1() {
-  //   this.details(this.searchForm.value);
   // }
 }

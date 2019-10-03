@@ -1,6 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { NgxPaginationModule } from "ngx-pagination";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -26,7 +27,8 @@ import { TokenInterceptorService } from "./token-interceptor.service";
     SharedModule,
     FileSharingModule,
     FriendModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    NgxPaginationModule
   ],
   providers: [
     AuthService,

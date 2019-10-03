@@ -80,15 +80,6 @@
             <!-- <button class="btn btn-primary" (click)="delete(i.name)">
               delete
             </button> -->
-            <button
-              type="button"
-              class="btn btn-info btn-lg"
-              data-toggle="modal"
-              data-target="#myModal"
-              (click)="setName(i.name)"
-            >
-              Share
-            </button>
           </figure>
         </div>
       </li>
@@ -98,49 +89,6 @@
         class="pagination-class"
         (pageChange)="p = $event"
       ></pagination-controls>
-    </div>
-  </div>
-
-  <div class="container">
-    <!-- Trigger the modal with a button -->
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 style="margin-left: 10%" class="modal-title">Friend List</h3>
-            <button type="button" class="close" data-dismiss="modal">
-              &times;
-            </button>
-          </div>
-          <div class="modal-body">
-            <ul class="row">
-              <li *ngFor="let p of pending[0]" class="col-12 col-md-6 col-lg-3">
-                <figure>
-                  <h4>
-                    <div class="col-sm-6">
-                      <p>{{ p.email }}</p>
-                      <input
-                        type="checkbox"
-                        name="sendfile"
-                        value="{{ p.email }}"
-                        class="friend"
-                      />
-                      Send File<br />
-                    </div>
-                  </h4>
-                </figure>
-              </li>
-            </ul>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary" (click)="send()">
-              Send
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>

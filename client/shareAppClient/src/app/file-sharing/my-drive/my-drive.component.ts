@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 
 import { HttpClient } from "@angular/common/http";
 import { FileSelectDirective } from "ng2-file-upload";
+import { NgxPaginationModule } from "ngx-pagination";
 @Component({
   selector: "app-my-drive",
   templateUrl: "./my-drive.component.html",
@@ -25,11 +26,12 @@ export class MyDriveComponent implements OnInit {
   pending: any = [];
   user: any;
   formvalue: any;
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-    private http: HttpClient
-  ) {}
+  images;
+  file;
+  currentFileToSend;
+  receiversList: any = [];
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.http.get("http://localhost:3001/fetchFiles").subscribe(
@@ -37,7 +39,6 @@ export class MyDriveComponent implements OnInit {
         console.log(data);
         this.imagePath = data;
       },
-
       err => {
         console.log(err);
       }
@@ -55,18 +56,32 @@ export class MyDriveComponent implements OnInit {
     );
   }
   send(obj) {
-    this.formvalue = obj;
-
-    this.http.post("http://localhost:3001/sendFile", this.formvalue).subscribe(
-      data => {
-        console.log(data);
-      },
-      err => {
-        console.log(err);
+    var list = document.querySelectorAll(".friend");
+    console.log(list);
+    for (let i = 0; i < list.length; i++) {
+      if (list[i]["checked"] === true) {
+        this.receiversList.push(list[i]["value"]);
       }
-    );
+    }
+    console.log(this.receiversList);
+    this.formvalue = obj;
+    this.http
+      .post("http://localhost:3001/sendFile", {
+        list: this.receiversList,
+        value: this.currentFileToSend
+      })
+      .subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
-  // onSave() {
-  //   this.send(this.searchForm.value);
-  // }
+  setName(fileName) {
+    this.currentFileToSend = fileName;
+    console.log(this.currentFileToSend);
+  }
+  send1() {}
 }

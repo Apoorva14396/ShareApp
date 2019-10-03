@@ -98,7 +98,6 @@ const verifyToken = (req, res, next) => {
   }
   const payload = jwt.verify(token, "secretkey", (err, res) => {
     if (err) {
-      // console.log("err", err);
       return res.status(500).send("Unauthorized request");
     }
     console.log("res", res);
