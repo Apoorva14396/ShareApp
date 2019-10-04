@@ -53,7 +53,7 @@ As an admin is logged in he/she will land into the dashboard where analytics can
 
 -User can upload single or multiple files in **Upload File**.<br />
 -User can see his uploaded files in **My Drive**.<br />
--User can see files share by him in **Shared Files**.<br />
+-User can see files share by him in **Received Files**.<br />
 
 
 TODO
