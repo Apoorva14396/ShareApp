@@ -4,6 +4,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { FileUploadComponent } from "./file-upload/file-upload.component";
 import { MyDriveComponent } from "./my-drive/my-drive.component";
+import { ReceivedfilesComponent } from "./receivedfiles/receivedfiles.component";
 const routes: Routes = [
   {
     path: "",
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: "uploaded",
     component: MyDriveComponent
+  },
+  {
+    path: "received",
+    component: ReceivedfilesComponent
   }
 ];
 

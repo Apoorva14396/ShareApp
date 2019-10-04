@@ -56,11 +56,17 @@
       aria-hidden="true"
     ></span
   ></a>
+  <a routerLink="/file-sharing/received">
+    Received files<span
+      class="glyphicon glyphicon-circle-arrow-up"
+      aria-hidden="true"
+    ></span
+  ></a>
 </div>
 <section class="our-webcoderskull padding-lg">
   <div class="container">
     <div class="row heading heading-icon">
-      <h2>Uploaded Files</h2>
+      <h2>Received Files</h2>
     </div>
     <ul class="row">
       <li
@@ -77,9 +83,6 @@
               alt=""
             />
             <p>{{ i.name }}</p>
-            <!-- <button class="btn btn-primary" (click)="delete(i.name)">
-              delete
-            </button> -->
           </figure>
         </div>
       </li>

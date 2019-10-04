@@ -99,25 +99,6 @@ const multipleFiles = (req, res, _next) => {
     );
   }
 };
-/* Delete File */
-// const deleted = (req, res) => {
-//   console.log(req.file);
-//   UserModel.findOneAndUpdate(
-//     { email: req.email },
-//     {
-//       $pull: {
-//         uploadedFiles: req.file.path
-//       }
-//     },
-//     (err, doc) => {
-//       if (err) {
-//         res.status(500).send(err);
-//       } else {
-//         res.json("deleted");
-//       }
-//     }
-//   );
-// };
 
 /* Send File*/
 const sendFile = (req, res, _next) => {

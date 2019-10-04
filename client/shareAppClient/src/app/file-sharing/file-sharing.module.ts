@@ -12,7 +12,7 @@ import { FileUploadComponent } from "./file-upload/file-upload.component";
 import { FileSelectDirective } from "ng2-file-upload";
 import { TokenInterceptorService } from "../token-interceptor.service";
 import { MyDriveComponent } from "./my-drive/my-drive.component";
-import { ReceivedfilesComponent } from './receivedfiles/receivedfiles.component';
+import { ReceivedfilesComponent } from "./receivedfiles/receivedfiles.component";
 
 @NgModule({
   declarations: [
