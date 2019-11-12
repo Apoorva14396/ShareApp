@@ -14,6 +14,7 @@ This app is all about sending friend requests, sharing files with your friends.
   
 -git clone this repository <br />
 -npm install in both client and server directories.<br />
+-npm install bcrypt in server.br/>
 -client run ng s -o.<br />
 -server run nodemon index.js.<br />
 
@@ -56,8 +57,4 @@ As an admin is logged in he/she will land into the dashboard where analytics can
 -User can see files share by him in **Received Files**.<br />
 
 
-TODO
 
-Admin module- analytics left.
-
-Share-file Module- sending file left (Shared Files).
