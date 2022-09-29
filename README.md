@@ -34,6 +34,9 @@ As an admin is logged in he/she will land into the dashboard where analytics can
   
 <h3>As a New User.<br /></h3>
 
+
+gg
+
 -You need to Signup by clicking on signup. Once you have submit your details through nodemailer you'll get a mail to verify your token only if your email id is valid.Then you can login as Registered User.<br />
 
 <h3>As a Registered User<br /></h3>
